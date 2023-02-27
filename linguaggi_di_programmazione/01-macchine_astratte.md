@@ -60,18 +60,48 @@ Tali macchine differiscono tra loro nel modo in cui l'interprete è realizzato e
 Una qualsiasi macchina astratta $M_L$ per essere effetttivamente realizzata dovrà **prima o poi utilizzare** qualche dispositivo fisico per eseguire le istruzioni di $L$.
 
 Possiamo realizzare una macchina astratta:
-1. In HARDWARE: viene usata solo per macchine di basso livello; massima velocità, flessibilità nulla.
+1. Realizzazione in hardware: viene usata solo per macchine di basso livello; massima velocità, flessibilità nulla.
 2. Emulazione mediante firmware: strutture dati e algoritmi realizzati da microprogrammi; alta velocità, flessibilità maggiore che hardware puro.
 3. Simulazione mediante software: strutture dati e algoritmi realizzati da programmi; minore velocità, massima flessibilità, macchina ospite qualsiasi.
 
 Nella realtà, la macchina astratta viene realizzata su di una macchina fisica mediante una combinazione delle tre tecniche sopra citate.
 
 ## Implementazione: il caso ideale
-==TODO: da fare (pag13)==
+Consideriamo un generico linguaggio $L$ che si vuole implementare, ovvero di cui si vuole realizzare una macchina astratta $M_L$. 
+Escludendo una realizzazione diretta di $M_L$ in hardware, possiamo supporre di avere a disposizione, per la realizzazione di $M_L$ , una macchina astratta $Mo_Lo$  (macchina ospite), che è già stata realizzata e che quindi ci permette di usare direttamente i suoi costrutti del suo linguaggio macchina $Lo$.
+
+L'implementazione di $L$ sulla macchina ospite $Mo_Lo$ avviene mediante una qualche "traduzione" di $L$ in $Lo$. 
+Possiamo distinguere due modalità di implementazione concettualmente molto diverse:
+- Implementazione interpretativa pura
+- Implementazione compilativa pura
+
 ### Implementazione interpretativa pura
-==TODO: da fare (pag14)==
+Nell'implementazione interpretativa pura si realizza l'interprete di $M_L$ mediante un insieme di istruzioni in $Lo$. Quindi $M_L$ è realizzata scrivendo un interprete per $L$ su $Mo_Lo$.
+
+Dunque non vi è una traduzione esplicita dei programmi scritti in $L$, ma vi è solo un procedimento di "decodifica". Tale decodifica non è una traduzione esplicita perchè il codice corrispondente ad un'istruzione di $L$ viene eseguito, non prodotto in uscita dall'interprete.
+
+Svantaggi: scarsa efficienza dato che non vi è una fase preliminare di traduzione (tempi di esecuzione raddoppiati: operazioni + decodifica).
+Vantaggi: maggiore flessibilità.
 ![implementazione_interpretativa_pura](./images/implementazione_interpretativa_pura.png)
+
 ### Implementazione compilativa pura
-==TODO: da fare (pag15)==
-### Confronto tra le due tecniche
-==TODO: da fare (pag16)==
+Nell'implementazione compilativa pura l'implementazione di di $L$ avviene traducendo esplicitamente i programmi scritti in $L$ in programmi scritti in $Lo$. La traduzione è eseguita da un opportuno programma, detto _compilatore_ $C_L,Lo$. ==(TODO da sistemare pedice)==
+
+In questo contesto il linguaggio $L$ è detto comunemente _linguaggio sorgente_, mentre il linguaggio $Lo$ è il _linguaggio oggetto_.
+
+I vantaggi e gli svantaggi sono gli opposti dell'implementazione interpretativa pura.
+
+Inoltre uno degli svantaggi maggiori dell'approccio compilativo risiede nella perdita di informazioni riguardo alla struttura del programma sorgente, perdita che rende più difficile l'interazione con il programma a tempo di esecuzione.
+Ad esempio, se a run-time si verificasse un errore potrebbe essere difficile determinare qual è il comando del programma sorgente che lo ha determinato, visto che tale comando è stato compilato in una sequenza di istruzioni del linguaggio oggetto. In questo caso può essere più difficile realizzare sistemi di debugging.
+![implementazione_compilativa_pura](./images/implementazione_compilativa_pura.png)
+
+### Implementazione: nel caso reale
+Nelle implementazioni dei linguaggi reali sono quasi sempre preseti entrambe le componenti.
+Un esempio è _Java_.
+![implementazione_caso_reale](./images/implementazione_caso_reale.png)
+
+# Gerarchia di macchine astratte
+==TODO: da fare (pag21)==
+
+# Sommario
+==TODO: da fare (pag24)==
