@@ -9,7 +9,7 @@ Gli oggetti ai quali può essere dato un nome si dicono _oggetti denotabili_. Es
 - Nomi definiti dall'utente: variabili, parametri formali, procedure (in senso lato), tipi definiti dall'utente, etuchette, moduli, costanti definite dall'utente, eccezioni;
 - Nomi definiti dal linguaggio di programmazione: tipi primitivi, operazioni primitive, costanti predefinite.
 
-Il legame o associazione (binding) è l'associazione che c'è tra un nome e l'oggetto.
+Si parla di *binding* quando viene stabilita un'associazione tra il nome e l'oggetto. 
 
 # Ambiente
 Un _ambiente_ (referencing environment) è l'insieme delle associazioni fra nomi e oggetti denotabili esistenti a run-time in uno specifico punto del programma ed in uno specificco momento dell'esecuzione.
