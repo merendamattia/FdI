@@ -12,7 +12,6 @@ Il termine "macchina" si riferisce alla macchina calcolatore. Una macchina astra
 Gli algoritmi che vogliamo eseguire devono essere rappresentati mediante le istruzioni di un opportuno linguaggio di programmazione $L$, linguaggio che sarà definito formalmente da una specifica sintassi e da una precisa semantica.
 
 Un programma $L$ (o un programma scritto in $L$) è un insieme finito di istruzioni di $L$.
-
 ![Macchina Astratta](./images/macchina_astratta.png)
 
 ## _Definizione (Macchina Astratta)_
@@ -40,7 +39,7 @@ I programmi scritti nel linguaggio macchina di $M_L$ saranno memorizzati nelle s
 ![struttura_calcolatore_convenzionale](./images/struttura_calcolatore_convenzionale.png)
 
 ## L'esempio della Macchina Hardware
-Come primo esempio di macchina astratta vediamo il caso di una macchina hardware: chiameremo $MH_LH$  ==(TODO da sistemare pedice)== tale macchina e $LH$ il suo linguaggio macchina.
+Come primo esempio di macchina astratta vediamo il caso di una macchina hardware: chiameremo $MH_{LH}$ tale macchina e $LH$ il suo linguaggio macchina.
 
 I componenti di questa macchina astratta saranno:
 - _Memoria:_ è la componente di memorizzazione della macchina fisica. È composta da vari livelli: principale, secondaria e cache.
@@ -85,7 +84,7 @@ Vantaggi: maggiore flessibilità.
 ![implementazione_interpretativa_pura](./images/implementazione_interpretativa_pura.png)
 
 ### Implementazione compilativa pura
-Nell'implementazione compilativa pura l'implementazione di di $L$ avviene traducendo esplicitamente i programmi scritti in $L$ in programmi scritti in $Lo$. La traduzione è eseguita da un opportuno programma, detto _compilatore_ $C_L,Lo$. ==(TODO da sistemare pedice)==
+Nell'implementazione compilativa pura l'implementazione di di $L$ avviene traducendo esplicitamente i programmi scritti in $L$ in programmi scritti in $Lo$. La traduzione è eseguita da un opportuno programma, detto _compilatore_ $C_{L,Lo}$.
 
 In questo contesto il linguaggio $L$ è detto comunemente _linguaggio sorgente_, mentre il linguaggio $Lo$ è il _linguaggio oggetto_.
 
