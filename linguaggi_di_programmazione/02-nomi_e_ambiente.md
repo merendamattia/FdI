@@ -1,6 +1,5 @@
 # I nomi e l'ambiente
 ==TODO: indice e ritorna all'indice==
-==TODO: mettere immagini al centro e non a sinistra==
 
 # Nomi e oggetti denotabili
 Un nome è una sequenza di caratteri usata per rappresentare, o denotare, un altro oggetto.
@@ -69,8 +68,69 @@ L'ambiente associato ad un blocco è costituito dalle tre parti seguenti:
 - Accesso
 - Modifica
 - Distruzione
-- ==(TODO: da approfondire pag153)
+- ==(TODO: da approfondire pag153)==
 
 ## Tempo di vita 
 La vita di un oggetto non coincide conn la vita dei legami per quell'oggetto.
 La vita dell'oggetto è più lunga di quella del legame
+==(TODO: da approfondire pag153)==
+
+# Regole di scope
+Sono le regole che, in ogni linguaggio, determinano la visibilità dei nomi.
+Esistono due tipologie di _scoping:_
+- Scope statico
+- Scope dinamico
+
+## Scope statico
+Lo scope statico richiede che il riferimento a un nome non locale e non globale venga risolto utilizzando il legame testualmente più vicino, procedendo dall'interno verso l'esterno.  
+
+Per risolvere un riferimento a un nome si esamina il blocco locale e tutti quelli via via più esterni che staticamente lo includono fino ad individuarne il legame.  
+
+La determinazione degli scope può essere effettuata dal compilatore, scegliendo il più recente legame attivo elaborato a tempo di compilazione.  
+Generalmente i linguaggi compilati usano lo scope statico.  
+```cpp
+// Esempio di scope statico
+A: { 
+	int a = 1;
+    B: { 
+	    int b = 2;
+        int c=2;
+        C: { int c = 3;
+            int d;
+            d = a + b + c;
+            write(d);        //stampa 6
+        }
+        D: {int e;
+            e = a + b + c;
+            write(e);        //stampa 5
+        }
+    }
+}
+```
+
+Vantaggi: avere il codice indipendente dalla posizione.
+
+## Scope dinamico
+Secondo la regola dello scope dinamico, l'associazione valida per un nome $X$, in un qualsiasi punto $P$ di un programma, è la più recente (in senso temporale) associazione creata per $X$ che sia ancora attiva quando il flusso di esecuzione arriva a $P$.  
+
+In poche parole lo _scope dinamico_ richiede la scelta del più recente legame ancora attivo stabilito a tempo di esecuzione.
+```cpp
+// Esempio di scope dinamico
+{
+    int x = 0;
+    void p(int n) {
+        x = n + 1;
+    }
+    p(3); 
+    write(x);            //stampa 4
+    {
+        int x = 0;
+        p(4);
+        write(x);        //stampa 0
+    }
+    write(x);            //stampa 5
+}
+```
+
+## Scope statico vs scope dinamico
+==TODO: aggiungi da foto==
