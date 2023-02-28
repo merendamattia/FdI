@@ -1,5 +1,14 @@
 # I nomi e l'ambiente
-==TODO: indice e ritorna all'indice==
+1. [Nomi e oggetti](#nomi%20e%20oggetti%20denotabili)
+2. [Ambiente](#ambiente)
+	- [Blocchi](#blocchi)
+	- [Tipi d'ambiente](#tipi%20d'ambiente)
+	- [Operazioni sull'ambiente](#operazioni%20sull'ambiente)
+	- [Operazioni su oggetti denotabili](#operazioni%20su%20oggetti%20denotabili)
+	- [Tempo di vita](#tempo%20di%20vita)
+3. [Regole di scope](#regole%20di%20scope)
+	- [Scope statico](#scope%20statico)
+	- [Scope dinamico](#scope%20dinamico)
 
 # Nomi e oggetti denotabili
 Un nome è una sequenza di caratteri usata per rappresentare, o denotare, un altro oggetto.
@@ -10,6 +19,10 @@ Gli oggetti ai quali può essere dato un nome si dicono _oggetti denotabili_. Es
 - Nomi definiti dal linguaggio di programmazione: tipi primitivi, operazioni primitive, costanti predefinite.
 
 Si parla di *binding* quando viene stabilita un'associazione tra il nome e l'oggetto. 
+
+_[Torna all'indice](#i%20nomi%20e%20l'ambiente)_
+
+---
 
 # Ambiente
 Un _ambiente_ (referencing environment) è l'insieme delle associazioni fra nomi e oggetti denotabili esistenti a run-time in uno specifico punto del programma ed in uno specificco momento dell'esecuzione.
@@ -48,6 +61,8 @@ I blocchi hanno anche la funzione di "raggruppare" una serie di comandi in un'en
 
 Una _dichiarazione locale_ ad un blocco è visibile in quel blocco e in tutti i blocchi in esso annidati, a meno che non intervenga in tali blocchi una nuova dichiarazione dello stesso nome. In tal caso, nel blocco in cui compare la ridefinizione, la nuova dichiarazione _nasconde_ (o maschera) la precedente.
 
+_[Torna all'indice](#i%20nomi%20e%20l'ambiente)_
+
 ## Tipi d'ambiente
 L'ambiente associato ad un blocco è costituito dalle tre parti seguenti:
 - _Locale:_ è costituito dall'insieme delle associazioni per nomi dichiarati localmente al blocco (variabili locali e parametri formali);
@@ -63,6 +78,8 @@ L'ambiente associato ad un blocco è costituito dalle tre parti seguenti:
 - _Riattivazione_ di un'associazione fra il nome e l'oggetto denotato: avviene quando si esce da un blocco dove era stata creata localmente una nuova associazione per quel nome;
 - _Distruzione_ di un'associazione fra il nome e l'oggetto denotato (unnaming): viene effettuata quando si esce dal blocco dove tali associazioni erano state create.
 
+_[Torna all'indice](#i%20nomi%20e%20l'ambiente)_
+
 ## Operazioni su oggetti denotabili
 - Creazione
 - Accesso
@@ -71,9 +88,15 @@ L'ambiente associato ad un blocco è costituito dalle tre parti seguenti:
 - ==(TODO: da approfondire pag153)==
 
 ## Tempo di vita 
-La vita di un oggetto non coincide conn la vita dei legami per quell'oggetto.
-La vita dell'oggetto è più lunga di quella del legame
-==(TODO: da approfondire pag153)==
+La vita di un oggetto non coincide con la vita dei legami per quell'oggetto.
+Infatti, un oggetto denotabile può avere un tempo di vita maggiore di quello dell'associazione fra nome e l'oggetto stesso, come nel caso in cui si passi per riferimento una variabile ad una procedura.
+
+Può anche accadere che il tempo di vita di un'associazione fra nome e oggetto denotato sia superiore a quello dell'oggetto stesso. Più precisamente, può avvenire che un nome permetta di accedere ad un oggetto che non esiste più.
+Una tale situazione anomala si può avere se si passa per riferimento un oggetto creato e quindi si dealloca la memoria per tale oggetto prima che la procedura termini.
+
+_[Torna all'indice](#i%20nomi%20e%20l'ambiente)_
+
+---
 
 # Regole di scope
 Sono le regole che, in ogni linguaggio, determinano la visibilità dei nomi.
@@ -94,13 +117,15 @@ A: {
 	int a = 1;
     B: { 
 	    int b = 2;
-        int c=2;
-        C: { int c = 3;
+        int c = 2;
+        C: { 
+	        int c = 3;
             int d;
             d = a + b + c;
             write(d);        //stampa 6
         }
-        D: {int e;
+        D: {
+	        int e;
             e = a + b + c;
             write(e);        //stampa 5
         }
@@ -109,6 +134,8 @@ A: {
 ```
 
 Vantaggi: avere il codice indipendente dalla posizione.
+
+_[Torna all'indice](#i%20nomi%20e%20l'ambiente)_
 
 ## Scope dinamico
 Secondo la regola dello scope dinamico, l'associazione valida per un nome $X$, in un qualsiasi punto $P$ di un programma, è la più recente (in senso temporale) associazione creata per $X$ che sia ancora attiva quando il flusso di esecuzione arriva a $P$.  
@@ -132,5 +159,22 @@ In poche parole lo _scope dinamico_ richiede la scelta del più recente legame
 }
 ```
 
+_[Torna all'indice](#i%20nomi%20e%20l'ambiente)_
+
 ## Scope statico vs scope dinamico
-==TODO: aggiungi da foto==
+Scope statico (statically scoped):
+- Informazione completa dal testo del programma
+- Le associazioni sono note a tempo di compilazione
+- Principi di indipendenza
+- Più complesso da implementare ma più efficiente
+- Usato in Algol, Pascal, C, Java, ...
+
+Scope dinamico (dynamically scoped):
+- Informazione derivata dall'esecuzione
+- Spesso è la causa di programmi meno "leggibili"
+- Più semplice da implementare ma meno efficiente
+- Usato in Lisp, Perl
+
+Differiscono solo in presenza congiunta di un ambiente non locale e non globale.
+
+_[Torna all'indice](#i%20nomi%20e%20l'ambiente)_
