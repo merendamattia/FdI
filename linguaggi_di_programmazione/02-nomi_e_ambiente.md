@@ -78,6 +78,28 @@ I blocchi hanno anche la funzione di "raggruppare" una serie di comandi in un'en
 
 Una _dichiarazione locale_ ad un blocco è visibile in quel blocco e in tutti i blocchi in esso annidati, a meno che non intervenga in tali blocchi una nuova dichiarazione dello stesso nome. In tal caso, nel blocco in cui compare la ridefinizione, la nuova dichiarazione _nasconde_ (o maschera) la precedente.
 
+```cpp
+int x = 1;
+{
+	int x = 3;
+	write(x); //viene stampato 3
+}
+write(x); //viene stampato 1
+```
+
+L'utilizzo dei blocchi permette un ottimizzazione del codice, perché le variabili allocate all'inizio del blocco e deallocate al termine di quest'ultimo, migliorando la memoria utilizzata.
+
+```cpp
+int x = 1;
+int y = 2;
+{
+	int tmp = x; //tmp viene allocata
+	x = y;
+	y = tmp;
+	//tmp viene deallocata
+}
+```
+
 _[Torna all'indice](#i%20nomi%20e%20l'ambiente)_
 
 ## Tipi d'ambiente
@@ -112,18 +134,28 @@ _[Torna all'indice](#i%20nomi%20e%20l'ambiente)_
 - *Modifica* (se l'oggetto è modificabile)
 - *Distruzione*
 
+L'ordine in cui dovrebbero avvenire le operazioni:
+1. Creazione di un oggetto
+2. Creazione di un legame per oggetto
+3. Riferimento all'oggetto, tramite il legame
+4. Disattivazione di un legame (cambio di blocco)
+5. Riattivazione di un legame
+6. Distruzione di un legame
+7. Distruzione di un oggetto
+
+
 ### Tempo di vita 
-Il tempo che intercorre tra la creazione e la distruzione di un oggetto viene detto *lifetime*; quello che intercorre tra la creazione del legame e la sua distruzione è la *vita dell'associazione*.
+Il tempo che intercorre tra la creazione e la distruzione di un oggetto viene detto *lifetime* (1-7); quello che intercorre tra la creazione del legame e la sua distruzione è la *vita dell'associazione* (2-6).
 
 Un oggetto denotabile può avere un tempo di vita maggiore di quello dell'associazione fra nome e l'oggetto stesso, come nel caso in cui si passi per riferimento una variabile ad una procedura.
 
 Può anche accadere che il tempo di vita di un'associazione fra nome e oggetto denotato sia superiore a quello dell'oggetto stesso. Più precisamente, può avvenire che un nome permetta di accedere ad un oggetto che non esiste più :
 ``` cpp
-int* pi = new int;
-int& x = *pi;
+int* pi = new int; // creazione di un oggetto
+int& x = *pi; // creazione di un legame
 
 delete pi; // L'oggetto non c'è più ma il legame tramite x si
-x = 7; // Undefined behaviour
+x = 7; // utlizzo del legame -> Undefined behaviour
 ```
 
 _[Torna all'indice](#i%20nomi%20e%20l'ambiente)_
@@ -193,18 +225,20 @@ In poche parole lo scope dinamico richiede la scelta del più recente legame a
 _[Torna all'indice](#i%20nomi%20e%20l'ambiente)_
 
 ## Scope statico vs scope dinamico
-Scope statico (*statically scoped*):
-- Informazione completa dal testo del programma
-- Le associazioni sono note a tempo di compilazione
-- Principi di indipendenza
-- Più complesso da implementare ma più efficiente
-- Usato in Algol, Pascal, C, Java, ...
 
-Scope dinamico (*dynamically scoped*):
-- Informazione derivata dall'esecuzione
-- Spesso è la causa di programmi meno "leggibili"
-- Più semplice da implementare ma meno efficiente
-- Usato in Lisp, Perl
+Riassumendo
+
+| Scope statico (*statically scoped*)| Scope dinamico (*dynamically scoped*)|
+| ------------- | -------------- |
+| L'informazione completa deriva dal testo del programma | L'informazione deriva dall'esecuzione del programma |
+| Le associazioni sono note a tempo di compolazione | Spesso è la causa di programmi meno "leggibili" |
+| Valgono i principi di indipendenza | Non valgono i principi di indipendenza |
+| È complesso da implementare, ma è più efficente | È semplice da implementare, però è poco efficiente |
+| Alcuni esempi di linguaggi che lo utilizzano sono Algo, Pascal, C, Java | Alcuni esempi di linguaggi che lo utilizzano sono Lisp, Perl |
+
+Questi differiscono solo in presenza congiunta di:
+- Ambiente non locale e non globale
+- Presenza di proecdure
 
 Differiscono solo in presenza congiunta di un ambiente non locale e non globale.
 
