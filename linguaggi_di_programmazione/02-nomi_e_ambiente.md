@@ -11,11 +11,10 @@
 	- [Scope dinamico](#scope%20dinamico)
 
 # Nomi e oggetti denotabili
-Un nome è una sequenza di caratteri usata per rappresentare, o denotare, un altro oggetto.
-Nella maggior parte dei linguaggi i nomi sono costituiti da identificatori, ossia da token alfanumerici.
+Un **nome** è una sequenza di caratteri alfanumerici ed è associato ad un oggetto *denotabile*. Nella maggior parte dei linguaggi i nomi sono costituiti da *identificatori*, ossia da token alfanumerici.
 
-Gli oggetti ai quali può essere dato un nome si dicono _oggetti denotabili_. Esistono due tipi di oggetti denotabili:
-- Nomi definiti dall'utente: variabili, parametri formali, procedure (in senso lato), tipi definiti dall'utente, etuchette, moduli, costanti definite dall'utente, eccezioni;
+Gli oggetti ai quali può essere dato un nome si dicono _oggetti denotabili_. Ne esistono due tipologie:
+- Nomi definiti dall'utente: variabili, parametri formali, procedure (in senso lato), tipi definiti dall'utente, etichette, moduli, costanti definite dall'utente, eccezioni;
 - Nomi definiti dal linguaggio di programmazione: tipi primitivi, operazioni primitive, costanti predefinite.
 
 Si parla di *binding* quando viene stabilita un'associazione tra il nome e l'oggetto. 
@@ -25,26 +24,26 @@ _[Torna all'indice](#i%20nomi%20e%20l'ambiente)_
 ---
 
 # Ambiente
-Un _ambiente_ (referencing environment) è l'insieme delle associazioni fra nomi e oggetti denotabili esistenti a run-time in uno specifico punto del programma ed in uno specificco momento dell'esecuzione.
+Definiamo **ambiente** (*referencing environment*) l'insieme delle associazioni fra nomi e oggetti denotabili esistenti a run-time in uno specifico punto del programma ed in uno specificco momento dell'esecuzione (quest'ultimo conta solo se il linguaggio non è staticamente compilato).
 
-Una _dichiarazione_ è un costrutto che permette di introdurre un'associazione nell'ambiente.
+Una **dichiarazione** (esplicita o implicita) è un costrutto che introduce un'associazione; chiaramente più nomi possono riferirsi allo stesso oggetto (*aliasing*):
+
 ```c
 int x; // dichiarazione di una variabile
 
-int func (){ // dichiarazione di una funzione
+int func() { // definizione (e dichiarazione) di una funzione
 	return 0;
 }
 
-type T = int; // dichiarazione di un nuovo tipo T, che coincide col tipo int
+typedef T = int; // dichiarazione di un nuovo tipo T, che coincide col tipo int
+
+x = 3;
+int& a = x; // a si riferisce a x
+int& b = x; // b si riferisce a x
 ```
 
-Lo stesso nome può denotare oggetti distinti in punti diversi del programma.
-
-Per _aliasing_ si intende quella situazione in cui uno stesso oggetto è visibile mediante nomi diversi nello stesso ambiente. È molto rischioso. 
-Il passaggio per riferimento è una possibile causa di aliasing.
-
 ## Blocchi
-Un _blocco_ è una regione testuale del programma, identificata da un segnale di inizio ed uno di fine, che può contenere dichiarazioni _locali_ a quella regione.
+L'ambiente è strutturato attraverso l'utilizzo di **blocchi**: una regione testuale del programma, identificata da un segnale di inizio ed uno di fine, che può contenere dichiarazioni _locali_ a quella regione.
 Nei linguaggi moderni l'ambiente è _strutturato_.
 - `begin ... end` -> Algol, Pascal
 - `{ ... }` -> C, Java
@@ -52,9 +51,27 @@ Nei linguaggi moderni l'ambiente è _strutturato_.
 - `let ... in .. end` -> ML
 
 I blocchi possono essere:
-- _anonimi_ (o in-line):  
-- associati ad una procedura: 
-==TODO: da approfondire==
+- associati ad una procedura
+	testualmente corrisponde al corpo della procedura stessa, esteso con le dichiarazioni dei parametri formali;
+``` cpp
+void foo() {
+	...
+}
+```
+- anonimi (o *in-line*)
+	non corrisponde ad una dichiarazione di procedura e può dunque comparire, in genere, in qualsiasi punto del programma.
+- annidati
+	ad esempio un blocco in-line dentro una definizione di procedura.
+``` c++
+int main() {
+	int x = 5;
+	{ // blocco annidato dentro la funzione main
+		int x = 1;
+		std::cout << x << std::endl; // stampa 1
+	}
+	std::cout << x << std::endl; // stampa 5
+}
+```
 
 ### Perchè i blocchi?
 I blocchi hanno anche la funzione di "raggruppare" una serie di comandi in un'entità sintattica che possa essere considerata come un unico comando (composto).
@@ -65,14 +82,23 @@ _[Torna all'indice](#i%20nomi%20e%20l'ambiente)_
 
 ## Tipi d'ambiente
 L'ambiente associato ad un blocco è costituito dalle tre parti seguenti:
-- _Locale:_ è costituito dall'insieme delle associazioni per nomi dichiarati localmente al blocco (variabili locali e parametri formali);
-- _Non locale:_ è costituito dalle associazioni relative ai nomi che sono visibili all'interno di un blocco ma che non sono stati dichiarati localmente;
-- _Globale:_ è costituito dalle associazioni create all'inizio dell'esecuzione del programma principale.
+- **Locale**
+	costituito dall'insieme delle associazioni per nomi dichiarati localmente al blocco (variabili locali e parametri formali);
+- **Non locale** 
+	costituito dalle associazioni ereditate da altri blocchi;
+``` cpp
+int x = 5;
+{
+	x++; // associazione con x ereditata
+}
+```
+- **Globale**
+	comprende le associazioni che sono comuni a tutti i blocchi. 
 
-==(TODO: aggiungere codice pagina 151 con relativi commenti)
+> Non tutti i linguaggi di programmazione hanno un ambiente globale.
 
 ## Operazioni sull'ambiente
-- _Creazione_ di un'associazione fra nome ed oggetto denoatto (naming): dichiarazione locale in blocco;
+- _Creazione_ di un'associazione fra nome ed oggetto denotato (naming): dichiarazione locale in blocco;
 - _Riferimento_ di un oggetto denotato mediante il suo nome (referencing): corrisponde all'uso di un nome;
 - _Disattivazione_ di un'associazione fra il nome e l'oggetto denotato: corrisponde all'ingresso in un blocco dove viene creata localmente una nuova associazione per quel nome;
 - _Riattivazione_ di un'associazione fra il nome e l'oggetto denotato: avviene quando si esce da un blocco dove era stata creata localmente una nuova associazione per quel nome;
@@ -81,35 +107,40 @@ L'ambiente associato ad un blocco è costituito dalle tre parti seguenti:
 _[Torna all'indice](#i%20nomi%20e%20l'ambiente)_
 
 ## Operazioni su oggetti denotabili
-- Creazione
-- Accesso
-- Modifica
-- Distruzione
-- ==(TODO: da approfondire pag153)==
+- *Creazione*
+- *Accesso*
+- *Modifica* (se l'oggetto è modificabile)
+- *Distruzione*
 
-## Tempo di vita 
-La vita di un oggetto non coincide con la vita dei legami per quell'oggetto.
-Infatti, un oggetto denotabile può avere un tempo di vita maggiore di quello dell'associazione fra nome e l'oggetto stesso, come nel caso in cui si passi per riferimento una variabile ad una procedura.
+### Tempo di vita 
+Il tempo che intercorre tra la creazione e la distruzione di un oggetto viene detto *lifetime*; quello che intercorre tra la creazione del legame e la sua distruzione è la *vita dell'associazione*.
 
-Può anche accadere che il tempo di vita di un'associazione fra nome e oggetto denotato sia superiore a quello dell'oggetto stesso. Più precisamente, può avvenire che un nome permetta di accedere ad un oggetto che non esiste più.
-Una tale situazione anomala si può avere se si passa per riferimento un oggetto creato e quindi si dealloca la memoria per tale oggetto prima che la procedura termini.
+Un oggetto denotabile può avere un tempo di vita maggiore di quello dell'associazione fra nome e l'oggetto stesso, come nel caso in cui si passi per riferimento una variabile ad una procedura.
+
+Può anche accadere che il tempo di vita di un'associazione fra nome e oggetto denotato sia superiore a quello dell'oggetto stesso. Più precisamente, può avvenire che un nome permetta di accedere ad un oggetto che non esiste più :
+``` cpp
+int* pi = new int;
+int& x = *pi;
+
+delete pi; // L'oggetto non c'è più ma il legame tramite x si
+x = 7; // Undefined behaviour
+```
 
 _[Torna all'indice](#i%20nomi%20e%20l'ambiente)_
 
 ---
 
 # Regole di scope
-Sono le regole che, in ogni linguaggio, determinano la visibilità dei nomi.
-Esistono due tipologie di _scoping:_
+Sono le regole che, in ogni linguaggio, determinano la visibilità dei nomi. Esistono due tipologie di _scoping:_
 - Scope statico
 - Scope dinamico
 
 ## Scope statico
-Lo scope statico richiede che il riferimento a un nome non locale e non globale venga risolto utilizzando il legame testualmente più vicino, procedendo dall'interno verso l'esterno.  
+Lo **scope statico** richiede che il riferimento a un nome non locale e non globale venga risolto utilizzando il legame testualmente più vicino, procedendo dall'interno verso l'esterno.  
 
 Per risolvere un riferimento a un nome si esamina il blocco locale e tutti quelli via via più esterni che staticamente lo includono fino ad individuarne il legame.  
 
-La determinazione degli scope può essere effettuata dal compilatore, scegliendo il più recente legame attivo elaborato a tempo di compilazione.  
+La determinazione degli scope può essere effettuata dal compilatore, scegliendo il più recente legame elaborato a tempo di compilazione.  
 Generalmente i linguaggi compilati usano lo scope statico.  
 ```cpp
 // Esempio di scope statico
@@ -138,9 +169,9 @@ Vantaggi: avere il codice indipendente dalla posizione.
 _[Torna all'indice](#i%20nomi%20e%20l'ambiente)_
 
 ## Scope dinamico
-Secondo la regola dello scope dinamico, l'associazione valida per un nome $X$, in un qualsiasi punto $P$ di un programma, è la più recente (in senso temporale) associazione creata per $X$ che sia ancora attiva quando il flusso di esecuzione arriva a $P$.  
+Secondo la regola dello **scope dinamico**, l'associazione valida per un nome $X$, in un qualsiasi punto $P$ di un programma, è la più recente (in senso temporale) associazione creata per $X$ che sia ancora attiva quando il flusso di esecuzione arriva a $P$.  
 
-In poche parole lo _scope dinamico_ richiede la scelta del più recente legame ancora attivo stabilito a tempo di esecuzione.
+In poche parole lo scope dinamico richiede la scelta del più recente legame ancora attivo stabilito a tempo di esecuzione.
 ```cpp
 // Esempio di scope dinamico
 {
@@ -153,7 +184,7 @@ In poche parole lo _scope dinamico_ richiede la scelta del più recente legame
     {
         int x = 0;
         p(4);
-        write(x);        //stampa 0
+        write(x);        //stampa 4, con lo scope statico avrebbe stampato 0
     }
     write(x);            //stampa 5
 }
@@ -162,14 +193,14 @@ In poche parole lo _scope dinamico_ richiede la scelta del più recente legame
 _[Torna all'indice](#i%20nomi%20e%20l'ambiente)_
 
 ## Scope statico vs scope dinamico
-Scope statico (statically scoped):
+Scope statico (*statically scoped*):
 - Informazione completa dal testo del programma
 - Le associazioni sono note a tempo di compilazione
 - Principi di indipendenza
 - Più complesso da implementare ma più efficiente
 - Usato in Algol, Pascal, C, Java, ...
 
-Scope dinamico (dynamically scoped):
+Scope dinamico (*dynamically scoped*):
 - Informazione derivata dall'esecuzione
 - Spesso è la causa di programmi meno "leggibili"
 - Più semplice da implementare ma meno efficiente
