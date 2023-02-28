@@ -134,7 +134,7 @@ _[Torna all'indice](#i%20nomi%20e%20l'ambiente)_
 - *Modifica* (se l'oggetto è modificabile)
 - *Distruzione*
 
-L'ordine in cui dovrebbero avvenire le operazioni:
+L'ordine in cui dovrebbero avvenire le operazioni è il seguente:
 1. Creazione di un oggetto
 2. Creazione di un legame per oggetto
 3. Riferimento all'oggetto, tramite il legame
@@ -143,9 +143,8 @@ L'ordine in cui dovrebbero avvenire le operazioni:
 6. Distruzione di un legame
 7. Distruzione di un oggetto
 
-
 ### Tempo di vita 
-Il tempo che intercorre tra la creazione e la distruzione di un oggetto viene detto *lifetime* (1-7); quello che intercorre tra la creazione del legame e la sua distruzione è la *vita dell'associazione* (2-6).
+Il tempo che intercorre tra la creazione e la distruzione di un oggetto viene detto *lifetime* (punti 1-7 dell'elenco soprastante); quello che intercorre tra la creazione del legame e la sua distruzione è la *vita dell'associazione* (punti 2-6).
 
 Un oggetto denotabile può avere un tempo di vita maggiore di quello dell'associazione fra nome e l'oggetto stesso, come nel caso in cui si passi per riferimento una variabile ad una procedura.
 
@@ -216,7 +215,7 @@ In poche parole lo scope dinamico richiede la scelta del più recente legame a
     {
         int x = 0;
         p(4);
-        write(x);        //stampa 4, con lo scope statico avrebbe stampato 0
+        write(x);        //stampa 5, con lo scope statico avrebbe stampato 0
     }
     write(x);            //stampa 5
 }
@@ -224,10 +223,7 @@ In poche parole lo scope dinamico richiede la scelta del più recente legame a
 
 _[Torna all'indice](#i%20nomi%20e%20l'ambiente)_
 
-## Scope statico vs scope dinamico
-
-Riassumendo
-
+## Riassumendo
 | Scope statico (*statically scoped*)| Scope dinamico (*dynamically scoped*)|
 | ------------- | -------------- |
 | L'informazione completa deriva dal testo del programma | L'informazione deriva dall'esecuzione del programma |
@@ -238,8 +234,6 @@ Riassumendo
 
 Questi differiscono solo in presenza congiunta di:
 - Ambiente non locale e non globale
-- Presenza di proecdure
-
-Differiscono solo in presenza congiunta di un ambiente non locale e non globale.
+- Presenza di procedure
 
 _[Torna all'indice](#i%20nomi%20e%20l'ambiente)_
