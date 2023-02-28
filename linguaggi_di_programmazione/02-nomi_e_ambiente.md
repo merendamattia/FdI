@@ -225,18 +225,20 @@ In poche parole lo scope dinamico richiede la scelta del più recente legame a
 _[Torna all'indice](#i%20nomi%20e%20l'ambiente)_
 
 ## Scope statico vs scope dinamico
-Scope statico (*statically scoped*):
-- Informazione completa dal testo del programma
-- Le associazioni sono note a tempo di compilazione
-- Principi di indipendenza
-- Più complesso da implementare ma più efficiente
-- Usato in Algol, Pascal, C, Java, ...
 
-Scope dinamico (*dynamically scoped*):
-- Informazione derivata dall'esecuzione
-- Spesso è la causa di programmi meno "leggibili"
-- Più semplice da implementare ma meno efficiente
-- Usato in Lisp, Perl
+Riassumendo
+
+| Scope statico (*statically scoped*)| Scope dinamico (*dynamically scoped*)|
+| ------------- | -------------- |
+| L'informazione completa deriva dal testo del programma | L'informazione deriva dall'esecuzione del programma |
+| Le associazioni sono note a tempo di compolazione | Spesso è la causa di programmi meno "leggibili" |
+| Valgono i principi di indipendenza | Non valgono i principi di indipendenza |
+| È complesso da implementare, ma è più efficente | È semplice da implementare, però è poco efficiente |
+| Alcuni esempi di linguaggi che lo utilizzano sono Algo, Pascal, C, Java | Alcuni esempi di linguaggi che lo utilizzano sono Lisp, Perl |
+
+Questi differiscono solo in presenza congiunta di:
+- Ambiente non locale e non globale
+- Presenza di proecdure
 
 Differiscono solo in presenza congiunta di un ambiente non locale e non globale.
 
