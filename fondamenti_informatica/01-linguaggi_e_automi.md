@@ -1,6 +1,8 @@
-==TODO: indice== 
+```toc
+```
+--- 
 
-# Alfabeti e Linguaggi
+## Alfabeti e Linguaggi
 Alcune definizioni.
 -   _Simbolo_: entità primitiva astratta che non è formalmente definita
 -   _Stringa_ (o _parola_): una sequenza finita di simboli giustapposti (uno dietro l’altro)    
@@ -14,7 +16,7 @@ Un **alfabeto** $\mathbf{\Sigma}$ è un insieme finito di simboli.
 Un _linguaggio formale_ è un insieme di stringhe costruite a partire dai simboli di un alfabeto $\Sigma$. 
 $\mathbf{\Sigma^*}$ indica l’insieme di tutte le stringhe generabili a partire da un fissato alfabeto $\Sigma$ (l’asterisco si chiama _stella di Kleene_).
 
-# Automi
+## Automi
 Un **automa a stati finiti** è un modello matematico di un sistema avente *input*,
 ed eventualmente *output*, a valori discreti. Il sistema può essere in uno stato tra un
 insieme finito di stati possibili. L’essere in uno stato gli permette di tener traccia
@@ -26,7 +28,7 @@ Il comportamento dell’automa si definisce in maniera univoca mediante una tabe
 Con la rappresentazione tramite grafo:
 ![automa_01](./images/automa01.jpeg)
 
-## Automi deterministici
+### Automi deterministici
 Un **automa a stati finiti deterministico** (DFA) è una quintupla $\langle Q,\,\Sigma,\,\delta,\,q_0,\,F \rangle$ dove:
 - $Q$ è un insieme finito di *stati*;
 - $\Sigma$ è un alfabeto (di input)

@@ -1,4 +1,8 @@
 # Gestione della memoria
+```toc
+```
+--- 
+
 Una componente importante dell'interprete di una macchina astratta è quella che si occupa della gestione della memoria.
 
 ## Tipi di allocazione della memoria
@@ -7,7 +11,7 @@ Una componente importante dell'interprete di una macchina astratta è quella che
 	- [Pila (stack)](#allocazione%20dinamica%20mediante%20pila): oggetti allocati con politica LIFO.
 	- Heap: oggetti allocati e deallocati in qualisasi momento.
 
-## Allocazione Statica
+### Allocazione Statica
 Gli oggetti allocati staticamente risiedono in una zona fissa di memoria (stabilita dal compilatore) per tutta la durata dell'esecuazione del programma.
 Solitamente sono allocati staticamente:
 - Variabili globali
@@ -17,11 +21,11 @@ Solitamente sono allocati staticamente:
 
 ==TODO: aggiungi foto pdf memoria statica==
 
-## Allocazione Dinamica mediante Pila
+### Allocazione Dinamica mediante Pila
 La maggior parte dei linguaggi di programmazione moderni permette una strutturazione a blocchi dei programmi.
 I blocchi, che siano in-line o associati alle procedure, vengono aperti e chiusi usando la politica LIFO: quando si entra in un blocco $A$ e poi in un blocco $B$, prima di uscire da $A$ si deve uscire da $B$.
 
-### Record di attivazione (RdA) per blocchi in-line 
+#### Record di attivazione (RdA) per blocchi in-line 
 ==TODO: aggiungi foto e approfondisci==
 
 La gestione della pila è compiuta mediante:
