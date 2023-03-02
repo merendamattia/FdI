@@ -10,7 +10,9 @@ Alcune definizioni.
 
 La _concatenazione_ di due stringhe $v, w$ è la stringa $vw$ che si ottiene facendo seguire alla prima la seconda; è un’operazione associativa.
 
-Un **alfabeto** $\mathbf{\Sigma}$ è un insieme finito di simboli. Un _linguaggio formale_ è un insieme di stringhe costruite a partire dai simboli di un alfabeto $\Sigma$. $\mathbf{\Sigma^*}$ indica l’insieme di tutte le stringhe generabili a partire da un fissato alfabeto $\Sigma$ (l’asterisco si chiama _stella di Kleene_).
+Un **alfabeto** $\mathbf{\Sigma}$ è un insieme finito di simboli. 
+Un _linguaggio formale_ è un insieme di stringhe costruite a partire dai simboli di un alfabeto $\Sigma$. 
+$\mathbf{\Sigma^*}$ indica l’insieme di tutte le stringhe generabili a partire da un fissato alfabeto $\Sigma$ (l’asterisco si chiama _stella di Kleene_).
 
 # Automi
 Un **automa a stati finiti** è un modello matematico di un sistema avente *input*,
