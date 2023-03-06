@@ -1,18 +1,9 @@
 # Macchine astratte
-1. [Linguaggi](#linguaggi)
-2. [Macchina astratta e interprete](#nozione%20di%20macchina%20astratta%20e%20interprete)
-	- [Linguaggio macchina](#definizione%20linguaggio%20macchina)
-	- [Macchina hardware](#l'esempio%20della%20macchina%20hardware)
-3. [Implementazione di un linguaggio](#implementazione%20di%20un%20linguaggio)
-4. [Realizzazione di una macchina astratta](#Realizzazione%20di%20una%20macchina%20astratta)
-	- [Implementazione interpretativa pura](#Implementazione%20interpretativa%20pura)
-	- [Implementazione compilativa pura](#Implementazione%20compilativa%20pura)
-5. [Gerarchia di macchine astratte](#gerarchia%20di%20macchine%20astratte)
-6. [Sommario](#sommario)
-
+```toc
+```
 ---
 
-# Linguaggi
+## Linguaggi
 Esistono diverse tipologie di linguaggi:
 - [Linguaggi imperativi](#linguaggi%20imperativi)
 - [Linguaggi dichiarativi](#linguaggi%20dichiarativi)
@@ -55,7 +46,7 @@ _[Torna all'indice](#macchine%20astratte)_
 
 ---
 
-# Nozione di macchina astratta e interprete
+## Nozione di macchina astratta e interprete
 Il termine "macchina" si riferisce alla macchina calcolatore. Una macchina astratta è un'astrazione del concetto di calcolatore fisico.  
 
 Gli algoritmi che vogliamo eseguire devono essere rappresentati mediante le istruzioni di un opportuno linguaggio di programmazione $L$, linguaggio che sarà definito formalmente da una specifica sintassi e da una precisa semantica.
@@ -63,13 +54,13 @@ Gli algoritmi che vogliamo eseguire devono essere rappresentati mediante le istr
 Un programma $L$ (o un programma scritto in $L$) è un insieme finito di istruzioni di $L$.
 ![Macchina Astratta](./images/macchina_astratta.png)
 
-## Definizione (Macchina Astratta)
+### Definizione (Macchina Astratta)
 Supponiamo che sia dato un linguaggio di programmazione $L$. Definiamo una macchina astratta per $L$, e la indichiamo con $M_L$ , un qualsiasi insieme di strutture dati e di algoritmi che permettono di memorizzare ed eseguire programmi scritti in $L$.
 
 Una generica macchina astratta $M_L$ è composta da una _memoria_ e da un _interprete_.
 La memoria serve per immagazzinare dati e programmi, mentre l'interprete è il componente che esegue le istruzioni contenute nei programmi.
 
-## Interprete
+### Interprete
 L'interprete dovrà compiere delle operazioni specifiche che dipendono dal particolare linguaggio $L$ che deve essere interpretato.
 L'interprete esegue diversi tipi di operazioni:
 1. Operazioni per l'elaborazione dei dati primitivi
@@ -82,14 +73,14 @@ L'interprete esegue diversi tipi di operazioni:
 
 _[Torna all'indice](#macchine%20astratte)_
 
-## Definizione (Linguaggio macchina)
+### Definizione (Linguaggio macchina)
 Data una macchina astratta $M_L$ , il linguaggio $L$ "compreso" dall'interprete di $M_L$ è detto linguaggio macchina di $M_L$.
 
 I programmi scritti nel linguaggio macchina di $M_L$ saranno memorizzati nelle strutture di memoria della macchina in modo tale da essere distinti dagli altri dati primitivi sui quali opera l'interprete.
 
 ![struttura_calcolatore_convenzionale](./images/struttura_calcolatore_convenzionale.png)
 
-## L'esempio della Macchina Hardware
+### L'esempio della Macchina Hardware
 Come primo esempio di macchina astratta vediamo il caso di una macchina hardware: chiameremo $MH_{LH}$ tale macchina e $LH$ il suo linguaggio macchina.
 
 I componenti di questa macchina astratta saranno:
@@ -101,20 +92,20 @@ _[Torna all'indice](#macchine%20astratte)_
 
 ---
 
-# Implementazione di un linguaggio
+## Implementazione di un linguaggio
 Una macchina astratta $M_L$ è per definizione un dispositivo che permette di eseguire programmi scritti in $L$. 
 Una macchina astratta corrisponde univocamente ad un linguaggio. 
 Inversamente, dato un linguaggio di programmazione $L$, vi sono molte (infinite) macchine astratte che hanno $L$ come proprio linguaggio macchina.
 Tali macchine differiscono tra loro nel modo in cui l'interprete è realizzato e nelle strutture dati che utilizzano, mentre tutte coincidono nel linguaggio interpretato $L$.
 
-## Microprogrammazione
+### Microprogrammazione
 ==TODO: da approfondire==
 
 _[Torna all'indice](#macchine%20astratte)_
 
 ---
 
-# Realizzazione di una macchina astratta
+## Realizzazione di una macchina astratta
 Una qualsiasi macchina astratta $M_L$ per essere effetttivamente realizzata dovrà **prima o poi utilizzare** qualche dispositivo fisico per eseguire le istruzioni di $L$.
 
 Possiamo realizzare una macchina astratta:
@@ -126,7 +117,7 @@ Nella realtà, la macchina astratta viene realizzata su di una macchina fisica m
 
 _[Torna all'indice](#macchine%20astratte)_
 
-## Implementazione: il caso ideale
+### Implementazione: il caso ideale
 Consideriamo un generico linguaggio $L$ che si vuole implementare, ovvero di cui si vuole realizzare una macchina astratta $M_L$. 
 Escludendo una realizzazione diretta di $M_L$ in hardware, possiamo supporre di avere a disposizione, per la realizzazione di $M_L$ , una macchina astratta $Mo_Lo$  (macchina ospite), che è già stata realizzata e che quindi ci permette di usare direttamente i suoi costrutti del suo linguaggio macchina $Lo$.
 
@@ -166,7 +157,7 @@ _[Torna all'indice](#macchine%20astratte)_
 
 ---
 
-# Gerarchia di macchine astratte
+## Gerarchia di macchine astratte
 Un'architettura informatica (hardware o software) si strura in una serie di macchine astratte gerarchiche.
 
 Sia $M_i$ una macchina astratta:
@@ -181,7 +172,7 @@ _[Torna all'indice](#macchine%20astratte)_
 
 ---
 
-# Sommario
+## Sommario
 * La ___macchina astratta___: una formalizzazione astratta di un generico esecutore di algoritmi, formalizzati in ternini di uno specifico linguaggio di programmazione.
 - L'___interprete___: un componente essenziale della macchina astratta che ne caratterizza il comportamento, mettendo in relazione "operazionale" il linguaggio della macchina astratta col mondo fisico circostante.
 - Il ___linguaggio macchina___: il linguaggio di una generica macchina astratta.

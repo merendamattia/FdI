@@ -1,7 +1,7 @@
-``` toc
+# Alfabeti e linguaggi
+```toc
 ```
----
-# Alfabeti e Linguaggi
+--- 
 Alcune definizioni.
 -   _Simbolo_: entità primitiva astratta che non è formalmente definita
 -   _Stringa_ (o _parola_): una sequenza finita di simboli giustapposti (uno dietro l’altro)    
@@ -11,9 +11,11 @@ Alcune definizioni.
 
 La _concatenazione_ di due stringhe $v, w$ è la stringa $vw$ che si ottiene facendo seguire alla prima la seconda; è un’operazione associativa.
 
-Un **alfabeto** $\mathbf{\Sigma}$ è un insieme finito di simboli. Un _linguaggio formale_ è un insieme di stringhe costruite a partire dai simboli di un alfabeto $\Sigma$. $\mathbf{\Sigma^*}$ indica l’insieme di tutte le stringhe generabili a partire da un fissato alfabeto $\Sigma$ (l’asterisco si chiama _stella di Kleene_).
+Un **alfabeto** $\mathbf{\Sigma}$ è un insieme finito di simboli. 
+Un _linguaggio formale_ è un insieme di stringhe costruite a partire dai simboli di un alfabeto $\Sigma$. 
+$\mathbf{\Sigma^*}$ indica l’insieme di tutte le stringhe generabili a partire da un fissato alfabeto $\Sigma$ (l’asterisco si chiama _stella di Kleene_).
 
-# Automi
+## Automi
 Un **automa a stati finiti** è un modello matematico di un sistema avente *input*,
 ed eventualmente *output*, a valori discreti. Il sistema può essere in uno stato tra un
 insieme finito di stati possibili. L’essere in uno stato gli permette di tener traccia
@@ -25,8 +27,8 @@ Il comportamento dell’automa si definisce in maniera univoca mediante una tabe
 Con la rappresentazione tramite grafo:
 ![automa_01](./images/automa01.jpeg)
 
-## Automi deterministici
-Un **automa a stati finiti deterministico** (DFA) è una quintupla $\langle Q,\,\Sigma,\,\delta,\,q_0,\,F \rangle$ dove:
+### Automi deterministici
+Un <mark style="background: #FFB86CA6;">automa a stati finiti deterministico (DFA)</mark> è una quintupla $\langle Q,\,\Sigma,\,\delta,\,q_0,\,F \rangle$ dove:
 - $Q$ è un insieme finito di *stati*;
 - $\Sigma$ è un alfabeto (di input)
 - $\delta : Q \times \Sigma \longrightarrow Q$ è la *funzione di transizione* 
@@ -69,6 +71,9 @@ $$
 $$
 Una stringa $x$ è accettata da un NFA $\mathcal{M}$ se $\hat{\delta}{(q_0,\,x)} \cap F \neq \varnothing$, ovvero se nell'insieme risultante dalla computazione c'è <mark style="background: #FFB86CA6;">almeno uno stato accettante</mark>.
 Il *linguaggio accettato* da $\mathcal{M}$ è l'insieme delle stringhe accettate, ovvero che godono della precedente proprietà.
+
+Un esempio:
+![[NFA_esempio.png]]
 
 ## Equivalenza tra DFA e NFA
 Dimostriamo che i linguaggi accettati dai DFA e dagli NFA coincidono.
