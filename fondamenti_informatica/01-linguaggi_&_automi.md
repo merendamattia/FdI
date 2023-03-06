@@ -1,5 +1,6 @@
-==TODO: indice== 
-
+``` toc
+```
+---
 # Alfabeti e Linguaggi
 Alcune definizioni.
 -   _Simbolo_: entità primitiva astratta che non è formalmente definita
@@ -50,3 +51,38 @@ Il *linguaggio accettato* da un DFA $\mathcal{M}$ è l'insieme delle stringhe ac
 Un linguaggio è detto **regolare** se è accettato da qualche DFA, ovvero se esiste $\mathcal{M}$ tale che $L = L(\mathcal{M})$. 
 
 > $\varnothing$ e $\Sigma^*$ sono linguaggi regolari.  
+
+## Automi a stati finiti non deterministici
+Un **automa a stati finiti non deterministici** (NFA) presenta la stessa struttura vista per i DFA, eccetto per la *funzione di transizione*:
+$$ 
+	\delta : Q \times \Sigma \longrightarrow \mathcal{P}{(Q)}
+$$
+Infatti, ora il codominio di $\delta$ è *l'insieme delle parti di Q*; pertanto essa calcola, a partire da una coppia (*stato*, *simbolo*), <mark style="background: #FF5582A6;">un insieme di stati</mark> risultante. Si noti che ora è possibile $\delta({q,\,a}) = \varnothing$ per qualche $q \in Q$ ed $a \in \Sigma$ (in questo caso la computazione si arresta).
+
+Anche in questo caso si può definire
+$$
+\left\{\begin{array}{ll}
+	\hat{\delta}\left({q,\,\epsilon}\right) &= \{q\} \\
+	\hat{\delta}\left({q,\,wa}\right) &= 
+	\bigcup_{p \in \hat{\delta}({q,\,w})}{\delta{(p,\,a)}}
+\end{array}\right.
+$$
+Una stringa $x$ è accettata da un NFA $\mathcal{M}$ se $\hat{\delta}{(q_0,\,x)} \cap F \neq \varnothing$, ovvero se nell'insieme risultante dalla computazione c'è <mark style="background: #FFB86CA6;">almeno uno stato accettante</mark>.
+Il *linguaggio accettato* da $\mathcal{M}$ è l'insieme delle stringhe accettate, ovvero che godono della precedente proprietà.
+
+## Equivalenza tra DFA e NFA
+Dimostriamo che i linguaggi accettati dai DFA e dagli NFA coincidono.
+
+### DFA $\mathbb\Rightarrow$ NFA
+Questo lato dell'implicazione è banale; infatti un DFA si può vedere come un NFA in cui per ogni simbolo $a \in \Sigma$ si ha 
+$$
+	\delta({q,\,a}) = \{a\}
+$$
+ovvero la funzione di transizione per NFA restituisce sempre insiemi singoletti.
+
+### NFA $\mathbb\Leftarrow$ DFA
+L'altra implicazione è dimostrata dal **Teorema di Robin-Scott**:
+
+==TODO: teorema==
+
+==TODO: automi con $\epsilon$ transizioni==
