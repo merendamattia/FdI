@@ -29,7 +29,7 @@ Con la rappresentazione tramite grafo:
 ![automa_01](./images/automa01.jpeg)
 
 ### Automi deterministici
-Un **automa a stati finiti deterministico** (DFA) è una quintupla $\langle Q,\,\Sigma,\,\delta,\,q_0,\,F \rangle$ dove:
+Un <mark style="background: #FFB86CA6;">automa a stati finiti deterministico (DFA)</mark> è una quintupla $\langle Q,\,\Sigma,\,\delta,\,q_0,\,F \rangle$ dove:
 - $Q$ è un insieme finito di *stati*;
 - $\Sigma$ è un alfabeto (di input)
 - $\delta : Q \times \Sigma \longrightarrow Q$ è la *funzione di transizione* 
@@ -54,3 +54,11 @@ Il *linguaggio accettato* da un DFA $\mathcal{M}$ è l'insieme delle stringhe ac
 Un linguaggio è detto **regolare** se è accettato da qualche DFA, ovvero se esiste $\mathcal{M}$ tale che $L = L(\mathcal{M})$. 
 
 > $\varnothing$ e $\Sigma^*$ sono linguaggi regolari.  
+
+### Automi non deterministici
+Un automa a stati finiti non deterministico (NFA) è una quintupla $\langle Q,\,\Sigma,\,\delta,\,q_0,\,F \rangle$ dove <mark style="background: #FFF3A3A6;">TODO: scrivere definizione in latex</mark>
+
+<mark style="background: #FFF3A3A6;">TODO: da fare esempio</mark>
+![[NFA_esempio.png]]
+
+### Equivalenza tra DFA e NFA
