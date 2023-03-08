@@ -96,45 +96,83 @@ $$
 Una stringa $x$ è accettata da un NFA $\mathcal{M}$ se $\hat{\delta}{(q_0,\,x)} \cap F \neq \varnothing$, ovvero se nell'insieme risultante dalla computazione c'è almeno uno stato accettante.
 Il <mark style="background: #ABF7F7A6;">linguaggio accettato</mark> da $\mathcal{M}$ è l'insieme delle stringhe accettate, ovvero che godono della precedente proprietà.
 
-La rappresentazione mediante tabella degli NFA è profondamente diversa, mentre la rappresentazione a grafo rimane quasi immutata. L'unica differenza è che da un nodo possono uscire più archi (o nessuno) etichettati dallo stesso simbolo.
+La rappresentazione mediante tabella degli NFA è profondamente diversa (per ogni simbolo letto va indicato un insieme di stati), mentre la rappresentazione a grafo rimane quasi immutata. L'unica differenza è che da un nodo possono uscire più archi (o nessuno) etichettati dallo stesso simbolo.
 
 #### Un esempio
 ![[NFA_esempio2.jpeg]]
 
 [_Torna all'indice_](#automi%20a%20stati%20finiti)
 
+---
+
 #### In parole più semplici
 Un NFA è un tipo di automa a stati finiti che ha la capacità di eseguire una o più transizioni per uno stesso simbolo in input. In altre parole, quando si legge un determinato simbolo, l'automa può scegliere di passare da uno stato all'altro in modo non deterministico, ovvero senza che vi sia un'unica opzione possibile.
 
-Oltre alla possibilità di più transizioni per lo stesso simbolo in input, <mark style="background: #FFB8EBA6;">un NFA può rimanere nello stesso stato anche senza leggere alcun simbolo in input.</mark> Questo significa che l'elaborazione di un input in un NFA non è completamente deterministica e può dipendere anche dallo stato corrente dell'automa.
+<mark style="background: #BBFABBA6;">Un NFA è composto</mark> da un insieme finito di stati, un alfabeto di simboli di input, una funzione di transizione, uno stato iniziale e uno o più stati finali. La funzione di transizione definisce come l'automa si muove tra i suoi stati in base ai simboli di input letti, restituendo **non** un singolo stato ma un **insieme** di stati.
 
-<mark style="background: #BBFABBA6;">Un NFA è composto</mark> da un insieme finito di stati, un alfabeto di simboli di input, una funzione di transizione, uno stato iniziale e uno o più stati finali. La funzione di transizione definisce come l'automa si muove tra i suoi stati in base ai simboli di input letti, e può essere definita in modo non deterministico.
+<mark style="background: #FFB86CA6;">Un NFA può accettare</mark> una stringa di input se esiste almeno una possibile sequenza di transizioni che porti l'automa da uno stato iniziale ad uno stato finale accettante. In altre parole, se almeno un risultato tra tutte le computazioni sviluppate è accettante, la stringa viene accettata dall'automa.
 
-<mark style="background: #FFB86CA6;">Un NFA può accettare</mark> una stringa di input se esiste almeno una possibile sequenza di transizioni che porti l'automa da uno stato iniziale ad uno stato finale in base ai simboli di input letti. In altre parole, se esiste un percorso dallo stato iniziale a uno stato finale per la stringa di input data, l'automa accetta la stringa.
+Esiste un procedimento per convertire un NFA in un DFA equivalente, chiamato <mark style="background: #FFF3A3A6;">"costruzione di subset"</mark>. Questo processo consiste nel creare un DFA che ha come stati tutti i possibili sottoinsiemi degli stati dell'NFA ($\mathcal{P}(Q)$) e come funzione di transizione una combinazione delle transizioni non deterministe dell'NFA. In altre parole, il DFA "simula" l'elaborazione dell'input in modo deterministico, esplorando tutte le possibili scelte di transizione dell'NFA.
 
-Esiste un procedimento per convertire un NFA in un DFA equivalente, chiamato <mark style="background: #FFF3A3A6;">"costruzione di subset"</mark>. Questo processo consiste nel creare un DFA che ha come stati tutti i possibili sottoinsiemi degli stati dell'NFA e come funzione di transizione una combinazione delle transizioni non deterministe dell'NFA. In altre parole, il DFA "simula" l'elaborazione dell'input in modo deterministico, esplorando tutte le possibili scelte di transizione dell'NFA.
-
-<mark style="background: #ABF7F7A6;">La conversione da NFA a DFA</mark> può essere utile quando si vuole ottenere una rappresentazione più efficiente dell'automa, ad esempio per accelerare l'elaborazione di stringhe di input. Tuttavia, in alcuni casi l'NFA può essere più efficiente o comodo da usare, ad esempio quando si definiscono espressioni regolari o si costruiscono parser per il riconoscimento di linguaggi formali.
-
-In sintesi, un NFA è un tipo di automa a stati finiti che ha la capacità di eseguire più transizioni per uno stesso simbolo in input e può rimanere nello stesso stato senza leggere alcun simbolo in input. Un NFA può accettare una stringa di input se esiste almeno un percorso di transizioni che porti l'automa da uno stato iniziale a uno stato finale. L'NFA può essere convertito in un DFA equivalente mediante il processo di costruzione di subset.
+<mark style="background: #ABF7F7A6;">La conversione da NFA a DFA</mark> può essere utile quando si vuole ottenere una rappresentazione più efficiente dell'automa, ad esempio per accelerare l'elaborazione di stringhe di input. Tuttavia, in alcuni casi l'NFA può essere più efficiente o comodo da usare, ad esempio quando si definiscono espressioni regolari o si costruiscono parser per il riconoscimento di linguaggi formali
 
 [_Torna all'indice_](#automi%20a%20stati%20finiti)
 
 ---
 
-### ε-NFA - Automi con ε-transizioni
-<mark style="background: #FFF3A3A6;">TODO: da scrivere definizione in latex</mark>
+### ε-NFA: Automi con ε-transizioni
+Un $\text{NFA}$ con $\varepsilon$-transizioni è un automa analogo agli NFA ma da cui differisce per la *funzione di transizione* $\delta$ così definita:
+$$
+	\delta : Q \times \left({ \Sigma \cup \{\varepsilon\} }\right) \longrightarrow \mathcal{P}(Q)
+$$
+ovvero ammette come input non solo simboli ma anche la stringa vuota, associata al "simbolo speciale" $\varepsilon$.
+Questa definizione permette all'automa di passare ad un altro stato anche senza "leggere" caratteri di input.
+
+La costruzione della funzione $\hat\delta$ necessita del supporto di una nuova funzione, chiamata $\varepsilon \text{-closure}$; applicata ad uno stato, essa restituisce l'insieme degli stati raggiungibili da esso (compreso se stesso) mediante $\varepsilon$-transizioni.
+<!-- 
+$$ 
+\varepsilon\text{-closure}(q) : 
+\left\{\begin{array}{l}
+	Q \longrightarrow \mathcal{P}(Q) \\
+	q \mapsto \{  \} 
+\end{array}\right.
+$$
+-->
+Si estende il concetto di $\varepsilon \text{-closure}$ ad un insieme di stati:
+$$
+	\varepsilon \text{-closure}(\text{P}) = \bigcup_{p \in \text{P}}{\varepsilon \text{-closure}(p)} 
+$$
+Ora definiamo la funzione $\hat\delta$ :
+$$
+\left\{\begin{array}{cl}
+	\hat{\delta}({q,\,\varepsilon}) &= 
+		\varepsilon \text{-closure}(q) \\
+	\hat{\delta}({q,\,wa}) &= 
+		\bigcup_{p \in \hat{\delta}({q,\,w})}{\varepsilon \text{-closure}(\delta(p,\,a))}
+\end{array}\right.
+$$
+> In questo caso $\hat{\delta}({q,\,a})$ può essere diverso da $\delta({q,\,a})$.
+
+A questo punto, il *linguaggio accettato* da un $\varepsilon \text{-NFA}$ $\mathcal{M}$ è
+$$
+	L(\mathcal{M}) = \{x \in \Sigma^* :
+		\hat{\delta}({q_0,\,x}) \cap F \neq \varnothing\}
+$$
+[_Torna all'indice_](#automi%20a%20stati%20finiti)
+
+---
 
 #### In parole più semplici
-Un $\varepsilon$-NFA (NFA con transizioni "epsilon" o "nulle") è un tipo di automa a stati finiti non deterministico in cui le transizioni sono etichettate non solo con simboli di input, ma anche con il simbolo epsilon ($\varepsilon$), che rappresenta una transizione "nullo" o "vuota".
+Un $\varepsilon \text{-NFA}$ (NFA con transizioni "epsilon" o "nulle") è un tipo di automa a stati finiti non deterministico in cui le transizioni sono etichettate non solo con simboli di input, ma anche con il simbolo $\varepsilon$ *epsilon*, che rappresenta una transizione "nullo" o "vuota".
 
-<mark style="background: #FFB86CA6;">Le transizioni epsilon permettono all'automa di passare da uno stato all'altro senza consumare alcun simbolo di input.</mark> Ad esempio, se un $\varepsilon$-NFA ha una transizione ε dallo stato $A$ allo stato $B$, l'automa può passare direttamente dallo stato A allo stato B senza consumare alcun simbolo di input.
+<mark style="background: #FFB86CA6;">Le transizioni epsilon permettono all'automa di passare da uno stato all'altro senza consumare alcun simbolo di input.</mark> Ad esempio, se un $\varepsilon$-NFA ha una transizione ε dallo stato $A$ allo stato $B$, l'automa può passare direttamente dallo stato A allo stato B senza consumare alcun simbolo di input. 
+Il resto della computazione è analogo a quello degli automi a stati finiti non deterministici (NFA).
 
-In un $\varepsilon$-NFA, durante l'elaborazione di un input, <mark style="background: #BBFABBA6;">l'automa può eseguire più transizioni per uno stesso simbolo di input, scegliendo uno qualsiasi dei possibili percorsi di transizioni.</mark> Ad esempio, se un $\varepsilon$-NFA ha una transizione da uno stato $A$ a uno stato $B$ sia con il simbolo "a" che con una transizione epsilon, l'automa può passare dallo stato $A$ allo stato $B$ utilizzando sia il simbolo "a" che una transizione epsilon.
-
+<mark style="background: #FF5582A6;">DA VERIFICARE</mark>
 Un $\varepsilon$-NFA può rappresentare [espressioni regolari](02-espressioni_regolari.md) che contengono l'operatore "or" (|) o linguaggi formali che includono stringhe vuote, in quanto le transizioni epsilon consentono di passare da uno stato all'altro senza consumare alcun simbolo di input e di rappresentare quindi la possibilità di avere una scelta tra diverse opzioni o di avere una stringa vuota. Inoltre, ogni $\varepsilon$-NFA può essere convertito in un NFA equivalente mediante l'eliminazione delle transizioni epsilon e successivamente in un DFA equivalente mediante la costruzione di subset.
+<mark style="background: #FF5582A6;">	</mark>
 
-<mark style="background: #FFF3A3A6;">In sintesi</mark>, un $\varepsilon$-NFA è un automa a stati finiti non deterministico in cui le transizioni sono etichettate non solo con simboli di input, ma anche con il simbolo epsilon, che rappresenta una transizione "nullo" o "vuota". Le transizioni epsilon permettono all'automa di passare da uno stato all'altro senza consumare alcun simbolo di input e di eseguire più transizioni per uno stesso simbolo di input. L'$\varepsilon$-NFA può rappresentare espressioni regolari che contengono l'operatore "or" o linguaggi formali che includono stringhe vuote e può essere convertito in un NFA e successivamente in un DFA equivalente.
+<mark style="background: #FFF3A3A6;">In sintesi</mark>, un $\varepsilon$-NFA è un automa a stati finiti non deterministico in cui le transizioni sono etichettate non solo con simboli di input, ma anche con il simbolo epsilon, che rappresenta una transizione "nullo" o "vuota". Le transizioni epsilon permettono all'automa di passare da uno stato all'altro senza consumare alcun simbolo di input e di eseguire più transizioni per uno stesso simbolo di input. L'$\varepsilon$-NFA può rappresentare espressioni regolari che contengono l'operatore "or" e può essere convertito in un NFA e successivamente in un DFA equivalente.
 
 [_Torna all'indice_](#automi%20a%20stati%20finiti)
 
