@@ -169,8 +169,7 @@ Un $\varepsilon \text{-NFA}$ (NFA con transizioni "epsilon" o "nulle") è un tip
 Il resto della computazione è analogo a quello degli automi a stati finiti non deterministici (NFA).
 
 <mark style="background: #FF5582A6;">DA VERIFICARE</mark>
-Un $\varepsilon$-NFA può rappresentare [espressioni regolari](02-espressioni_regolari.md) che contengono l'operatore "or" (|) o linguaggi formali che includono stringhe vuote, in quanto le transizioni epsilon consentono di passare da uno stato all'altro senza consumare alcun simbolo di input e di rappresentare quindi la possibilità di avere una scelta tra diverse opzioni o di avere una stringa vuota. Inoltre, ogni $\varepsilon$-NFA può essere convertito in un NFA equivalente mediante l'eliminazione delle transizioni epsilon e successivamente in un DFA equivalente mediante la costruzione di subset.
-<mark style="background: #FF5582A6;">	</mark>
+> Un $\varepsilon$-NFA può rappresentare [espressioni regolari](02-espressioni_regolari.md) che contengono l'operatore "or" (|) o linguaggi formali che includono stringhe vuote, in quanto le transizioni epsilon consentono di passare da uno stato all'altro senza consumare alcun simbolo di input e di rappresentare quindi la possibilità di avere una scelta tra diverse opzioni o di avere una stringa vuota. Inoltre, ogni $\varepsilon$-NFA può essere convertito in un NFA equivalente mediante l'eliminazione delle transizioni epsilon e successivamente in un DFA equivalente mediante la costruzione di subset.
 
 <mark style="background: #FFF3A3A6;">In sintesi</mark>, un $\varepsilon$-NFA è un automa a stati finiti non deterministico in cui le transizioni sono etichettate non solo con simboli di input, ma anche con il simbolo epsilon, che rappresenta una transizione "nullo" o "vuota". Le transizioni epsilon permettono all'automa di passare da uno stato all'altro senza consumare alcun simbolo di input e di eseguire più transizioni per uno stesso simbolo di input. L'$\varepsilon$-NFA può rappresentare espressioni regolari che contengono l'operatore "or" e può essere convertito in un NFA e successivamente in un DFA equivalente.
 
@@ -193,7 +192,7 @@ $$
 	L'altra implicazione è dimostrata dal **Teorema di Robin-Scott**: 
 	Sia $M = \langle Q,\,\Sigma,\,\delta,\,q_0,\,F \rangle$ un NFA. Allora esiste un DFA $M'$ tale che $L(M) = L(M')$.
 
-#### In parole più semplici
+### In parole più semplici
 Esiste un importante teorema (*Robin-Scott*) nella teoria dei linguaggi formali che afferma che ogni NFA può essere convertito in un DFA equivalente, ovvero che accetta lo stesso linguaggio di stringhe.
 
 In altre parole, per ogni NFA esiste un DFA equivalente che riconosce lo stesso linguaggio formale. Questo teorema è noto anche come *"teorema di equivalenza DFA-NFA"* ed è fondamentale nella teoria dei linguaggi formali, in quanto permette di utilizzare i DFA (che sono più facili da implementare e analizzare) al posto degli NFA, senza perdere l'espressività del modello.
