@@ -2,6 +2,7 @@
 ```toc
 ```
 --- 
+<mark style="background: #FFF3A3A6;">TODO: da sistemare espressioni in latex ε-step e ε-closure</mark>
 ## Alfabeti e linguaggi
 Alcune definizioni.
 -   _Simbolo_: entità primitiva astratta che non è formalmente definita
@@ -158,6 +159,36 @@ $$
 	L(\mathcal{M}) = \{x \in \Sigma^* :
 		\hat{\delta}({q_0,\,x}) \cap F \neq \varnothing\}
 $$
+
+[_Torna all'indice_](#automi%20a%20stati%20finiti)
+
+---
+
+#### ε-step vs ε-closure
+Gli epsilon-step e l'epsilon-closure sono due concetti fondamentali nell'ambito degli automi a stati finiti e delle [espressioni regolari](02-espressioni_regolari).
+
+L'<mark style="background: #FFB86CA6;">ε-step</mark> è un'operazione che permette di spostarsi da uno stato all'altro senza consumare alcun simbolo di input. In pratica, se un automa a stati finiti ha una transizione che utilizza il simbolo epsilon (ε), allora esso può effettuare uno spostamento senza che sia necessario leggere alcun simbolo di input.
+> Definizione formale: 
+> Sia M un ε-NFA definito dalla quintupla $⟨Q, Σ, δ, q0, F ⟩$ e sia $S ∈ ℘(Q)$. L’operatore ε-step: $℘(Q) → ℘(Q)$ è definito come: $$ε-step(S) = {q ∈ Q | ∃p ∈ S . q ∈ δ(p,ε)}.$$
+
+Un esempio:
+![[epsilon-NFA_esempio.png]]
+
+L'<mark style="background: #FFB86CA6;">ε-closure</mark> di uno stato in un automa a stati finiti è l'insieme di tutti gli stati che possono essere raggiunti da quello stato tramite una serie di ε-step. In altre parole, l'ε-closure di uno stato è l'insieme di tutti gli stati che possono essere raggiunti da esso senza consumare alcun simbolo di input.
+> Definizione formale:
+> Sia M un ε-NFA definito dalla quintupla $⟨Q, Σ, δ, q0, F ⟩$. Sia $S ∈ ℘(Q)$. La ε-closure: $℘(Q) → ℘(Q)$ è la chiusura riflessiva e transitiva dell’ε-step, ovvero: <mark style="background: #FFF3A3A6;">TODO: da aggiungere espressione in latex (Definizione 3.14 appunti tutorato)</mark>
+
+Un esempio:
+![[epsilon-NFA_esempio2.png]]
+
+ε-closure è UCO in quanto valgono le seguenti proprietà:
+1. Monotonia:
+	Sia $Q$ un insieme di stati di un ε-NFA. Siano $R$, $S ⊆ Q$. ε-closure è un operatore monotono quindi vale che $(R ⊆ S) ⇒ ε-closure(R) ⊆ ε-closure(S)$.
+2. Idempotenza: 
+	Sia $q ∈ Q$ uno stato. $ε-closure(ε-closure(q)) = ε-closure(q).$
+3. Estensività: 
+	Sia $S$ un insieme di stati di un ε-NFA. ε-closure è un operatore estensivo quindi vale che $S ⊆ ε-closure(S).$
+
 [_Torna all'indice_](#automi%20a%20stati%20finiti)
 
 ---
@@ -208,6 +239,19 @@ Un NFA è più comodo di un DFA: permette di eseguire più ipotesi.
 ## Equivalenza tra ε-NFA e NFA
 Ogni NFA è, per definizione, un caso particolare di un $\varepsilon$-NFA.
 Sia $M = \langle Q,\,\Sigma,\,\delta,\,q_0,\,F \rangle$ un $\varepsilon$-NFA. Allora esiste un NFA $M'$ tale che $L(M) = L(M')$.
+
+#### Eliminazione delle ε-transizioni
+Per semplificare l'automa a stati finiti, si può eliminare le ε-transizioni attraverso una procedura di eliminazione delle ε-transizioni, che consiste in tre passi:
+1. <mark style="background: #FFB8EBA6;">Calcolo dell'epsilon-closure per ogni stato:</mark> per ogni stato dell'automa, si calcola l'epsilon-closure, ovvero l'insieme di tutti gli stati che possono essere raggiunti da esso tramite ε-transizioni.
+2. <mark style="background: #FFB8EBA6;">Creazione di nuove transizioni:</mark> per ogni coppia di stati (p, q) e per ogni simbolo di input a, si crea una nuova transizione da p a q attraverso a se esiste una transizione da p a q attraverso a o se esiste una transizione da uno stato in ε-closure(p) a uno stato in ε-closure(q) attraverso a.
+3. <mark style="background: #FFB8EBA6;">Rimozione delle ε-transizioni:</mark> tutte le ε-transizioni vengono eliminate dall'automa.
+
+In pratica, la procedura di eliminazione delle ε-transizioni permette di semplificare l'automa a stati finiti e di renderlo più facile da analizzare, poiché elimina la presenza di transizioni che non consumano simboli di input. Inoltre, la procedura di eliminazione delle ε-transizioni è importante anche perché permette di convertire un automa a stati finiti con ε-transizioni (ε-NFA) in un automa a stati finiti equivalente senza ε-transizioni (NFA).
+
+Un esempio:
+![[epsilon-NFA_esempio3.png]]
+
+[_Torna all'indice_](#automi%20a%20stati%20finiti)
 
 ### In parole più semplici
 Un $\varepsilon$-NFA e un NFA sono due modelli di automi a stati finiti che possono riconoscere lo stesso insieme di linguaggi formali. In altre parole, per ogni linguaggio formale, esiste un $\varepsilon$-NFA equivalente a un NFA, e viceversa.
