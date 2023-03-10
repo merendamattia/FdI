@@ -2,6 +2,8 @@
 ```toc
 ```
 --- 
+<mark style="background: #FFF3A3A6;">TODO: da sistemare espressioni in latex ε-step e ε-closure</mark>
+
 ## Alfabeti e linguaggi
 Alcune definizioni.
 -   _Simbolo_: entità primitiva astratta che non è formalmente definita
@@ -158,6 +160,36 @@ $$
 	L(\mathcal{M}) = \{x \in \Sigma^* :
 		\hat{\delta}({q_0,\,x}) \cap F \neq \varnothing\}
 $$
+
+[_Torna all'indice_](#automi%20a%20stati%20finiti)
+
+---
+
+#### ε-step vs ε-closure
+Gli epsilon-step e l'epsilon-closure sono due concetti fondamentali nell'ambito degli automi a stati finiti e delle [espressioni regolari](02-espressioni_regolari).
+
+L'<mark style="background: #FFB86CA6;">ε-step</mark> è un'operazione che permette di spostarsi da uno stato all'altro senza consumare alcun simbolo di input. In pratica, se un automa a stati finiti ha una transizione che utilizza il simbolo epsilon (ε), allora esso può effettuare uno spostamento senza che sia necessario leggere alcun simbolo di input.
+> Definizione formale: 
+> Sia M un ε-NFA definito dalla quintupla $⟨Q, Σ, δ, q0, F ⟩$ e sia $S ∈ ℘(Q)$. L’operatore ε-step: $℘(Q) → ℘(Q)$ è definito come: $$ε-step(S) = {q ∈ Q | ∃p ∈ S . q ∈ δ(p,ε)}.$$
+
+Un esempio:
+![[epsilon-NFA_esempio.png]]
+
+L'<mark style="background: #FFB86CA6;">ε-closure</mark> di uno stato in un automa a stati finiti è l'insieme di tutti gli stati che possono essere raggiunti da quello stato tramite una serie di ε-step. In altre parole, l'ε-closure di uno stato è l'insieme di tutti gli stati che possono essere raggiunti da esso senza consumare alcun simbolo di input.
+> Definizione formale:
+> Sia M un ε-NFA definito dalla quintupla $⟨Q, Σ, δ, q0, F ⟩$. Sia $S ∈ ℘(Q)$. La ε-closure: $℘(Q) → ℘(Q)$ è la chiusura riflessiva e transitiva dell’ε-step, ovvero: <mark style="background: #FFF3A3A6;">TODO: da aggiungere espressione in latex (Definizione 3.14 appunti tutorato)</mark>
+
+Un esempio:
+![[epsilon-NFA_esempio2.png]]
+
+<mark style="background: #BBFABBA6;">ε-closure è UCO in quanto valgono le seguenti proprietà:</mark>
+1. Monotonia:
+	Sia $Q$ un insieme di stati di un ε-NFA. Siano $R$, $S ⊆ Q$. ε-closure è un operatore monotono quindi vale che $(R ⊆ S) ⇒ ε-closure(R) ⊆ ε-closure(S)$.
+2. Idempotenza: 
+	Sia $q ∈ Q$ uno stato. $ε-closure(ε-closure(q)) = ε-closure(q).$
+3. Estensività: 
+	Sia $S$ un insieme di stati di un ε-NFA. ε-closure è un operatore estensivo quindi vale che $S ⊆ ε-closure(S).$
+
 [_Torna all'indice_](#automi%20a%20stati%20finiti)
 
 ---
@@ -169,8 +201,7 @@ Un $\varepsilon \text{-NFA}$ (NFA con transizioni "epsilon" o "nulle") è un tip
 Il resto della computazione è analogo a quello degli automi a stati finiti non deterministici (NFA).
 
 <mark style="background: #FF5582A6;">DA VERIFICARE</mark>
-Un $\varepsilon$-NFA può rappresentare [espressioni regolari](02-espressioni_regolari.md) che contengono l'operatore "or" (|) o linguaggi formali che includono stringhe vuote, in quanto le transizioni epsilon consentono di passare da uno stato all'altro senza consumare alcun simbolo di input e di rappresentare quindi la possibilità di avere una scelta tra diverse opzioni o di avere una stringa vuota. Inoltre, ogni $\varepsilon$-NFA può essere convertito in un NFA equivalente mediante l'eliminazione delle transizioni epsilon e successivamente in un DFA equivalente mediante la costruzione di subset.
-<mark style="background: #FF5582A6;">	</mark>
+> Un $\varepsilon$-NFA può rappresentare [espressioni regolari](02-espressioni_regolari.md) che contengono l'operatore "or" (|) o linguaggi formali che includono stringhe vuote, in quanto le transizioni epsilon consentono di passare da uno stato all'altro senza consumare alcun simbolo di input e di rappresentare quindi la possibilità di avere una scelta tra diverse opzioni o di avere una stringa vuota. Inoltre, ogni $\varepsilon$-NFA può essere convertito in un NFA equivalente mediante l'eliminazione delle transizioni epsilon e successivamente in un DFA equivalente mediante la costruzione di subset.
 
 <mark style="background: #FFF3A3A6;">In sintesi</mark>, un $\varepsilon$-NFA è un automa a stati finiti non deterministico in cui le transizioni sono etichettate non solo con simboli di input, ma anche con il simbolo epsilon, che rappresenta una transizione "nullo" o "vuota". Le transizioni epsilon permettono all'automa di passare da uno stato all'altro senza consumare alcun simbolo di input e di eseguire più transizioni per uno stesso simbolo di input. L'$\varepsilon$-NFA può rappresentare espressioni regolari che contengono l'operatore "or" e può essere convertito in un NFA e successivamente in un DFA equivalente.
 
@@ -179,26 +210,23 @@ Un $\varepsilon$-NFA può rappresentare [espressioni regolari](02-espressioni_re
 ---
 
 ## Equivalenza tra DFA e NFA
-Poichè un DFA si può vedere come un NFA in cui $\delta({q,\,a})$ restituisce sempre insiemi costruiti da un solo stato, si ha che ogni linguaggio regolare è un linguaggio accettato da un qualunque NFA.
+Poichè un DFA si può vedere come un NFA in cui $\delta({q,\,a})$ restituisce sempre insiemi costruiti da un solo stato, si ha che <mark style="background: #FFB86CA6;">ogni linguaggio regolare è un linguaggio accettato da un qualunque NFA.</mark>
 
 Dimostriamo che i linguaggi accettati dai DFA e dagli NFA coincidono:
 - DFA $\mathbb\Rightarrow$ NFA
-	Questo lato dell'implicazione è banale; infatti un DFA si può vedere come un NFA in cui per ogni simbolo $a \in \Sigma$ si ha 
-$$
-	\delta({q,\,a}) = \{a\}
-$$
+	Questo lato dell'implicazione è banale; infatti un DFA si può vedere come un NFA in cui per ogni simbolo $a \in \Sigma$ si ha $\delta({q,\,a}) = \{a\}$
 	ovvero la funzione di transizione per NFA restituisce sempre insiemi singoletti.
 
 - NFA $\mathbb\Leftarrow$ DFA
 	L'altra implicazione è dimostrata dal **Teorema di Robin-Scott**: 
 	Sia $M = \langle Q,\,\Sigma,\,\delta,\,q_0,\,F \rangle$ un NFA. Allora esiste un DFA $M'$ tale che $L(M) = L(M')$.
 
-#### In parole più semplici
-Esiste un importante teorema (*Robin-Scott*) nella teoria dei linguaggi formali che afferma che ogni NFA può essere convertito in un DFA equivalente, ovvero che accetta lo stesso linguaggio di stringhe.
+### In parole più semplici
+<mark style="background: #ABF7F7A6;">Esiste un importante teorema (*Robin-Scott*) nella teoria dei linguaggi formali che afferma che ogni NFA può essere convertito in un DFA equivalente, ovvero che accetta lo stesso linguaggio di stringhe.</mark>
 
 In altre parole, per ogni NFA esiste un DFA equivalente che riconosce lo stesso linguaggio formale. Questo teorema è noto anche come *"teorema di equivalenza DFA-NFA"* ed è fondamentale nella teoria dei linguaggi formali, in quanto permette di utilizzare i DFA (che sono più facili da implementare e analizzare) al posto degli NFA, senza perdere l'espressività del modello.
 
-Il processo di conversione di un NFA in un DFA equivalente si basa sulla costruzione di un DFA che "simula" l'elaborazione dell'input in modo deterministico, esplorando tutte le possibili scelte di transizione dell'NFA. Questo processo è noto come "costruzione di subset" e consiste nel creare un DFA che ha come stati tutti i possibili sottoinsiemi degli stati dell'NFA e come funzione di transizione una combinazione delle transizioni non deterministe dell'NFA.
+<mark style="background: #BBFABBA6;">Il processo di conversione di un NFA in un DFA equivalente si basa sulla costruzione di un DFA che "simula" l'elaborazione dell'input in modo deterministico, esplorando tutte le possibili scelte di transizione dell'NFA.</mark> Questo processo è noto come "costruzione di subset" e consiste nel creare un DFA che ha come stati tutti i possibili sottoinsiemi degli stati dell'NFA e come funzione di transizione una combinazione delle transizioni non deterministe dell'NFA.
 
 Un NFA è più comodo di un DFA: permette di eseguire più ipotesi.
 
@@ -209,6 +237,20 @@ Un NFA è più comodo di un DFA: permette di eseguire più ipotesi.
 ## Equivalenza tra ε-NFA e NFA
 Ogni NFA è, per definizione, un caso particolare di un $\varepsilon$-NFA.
 Sia $M = \langle Q,\,\Sigma,\,\delta,\,q_0,\,F \rangle$ un $\varepsilon$-NFA. Allora esiste un NFA $M'$ tale che $L(M) = L(M')$.
+
+### Eliminazione delle ε-transizioni
+Per semplificare l'automa a stati finiti, si può eliminare le ε-transizioni attraverso una procedura di eliminazione delle ε-transizioni, che consiste in tre passi:
+1. <mark style="background: #FFB8EBA6;">Calcolo dell'epsilon-closure per ogni stato:</mark> per ogni stato dell'automa, si calcola l'epsilon-closure, ovvero l'insieme di tutti gli stati che possono essere raggiunti da esso tramite ε-transizioni.
+2. <mark style="background: #FFB8EBA6;">Creazione di nuove transizioni:</mark> per ogni coppia di stati (p, q) e per ogni simbolo di input a, si crea una nuova transizione da p a q attraverso a se esiste una transizione da p a q attraverso a o se esiste una transizione da uno stato in ε-closure(p) a uno stato in ε-closure(q) attraverso a.
+3. <mark style="background: #FFB8EBA6;">Rimozione delle ε-transizioni:</mark> tutte le ε-transizioni vengono eliminate dall'automa.
+
+In pratica, la procedura di eliminazione delle ε-transizioni permette di semplificare l'automa a stati finiti e di renderlo più facile da analizzare, poiché elimina la presenza di transizioni che non consumano simboli di input. 
+Inoltre, la procedura di eliminazione delle ε-transizioni è importante anche perché permette di convertire un automa a stati finiti con ε-transizioni (ε-NFA) in un automa a stati finiti equivalente senza ε-transizioni (NFA).
+
+Un esempio:
+![[epsilon-NFA_esempio3.png]]
+
+[_Torna all'indice_](#automi%20a%20stati%20finiti)
 
 ### In parole più semplici
 Un $\varepsilon$-NFA e un NFA sono due modelli di automi a stati finiti che possono riconoscere lo stesso insieme di linguaggi formali. In altre parole, per ogni linguaggio formale, esiste un $\varepsilon$-NFA equivalente a un NFA, e viceversa.
