@@ -3,6 +3,7 @@
 ```
 --- 
 <mark style="background: #FFF3A3A6;">TODO: da sistemare espressioni in latex ε-step e ε-closure</mark>
+
 ## Alfabeti e linguaggi
 Alcune definizioni.
 -   _Simbolo_: entità primitiva astratta che non è formalmente definita
@@ -181,7 +182,7 @@ L'<mark style="background: #FFB86CA6;">ε-closure</mark> di uno stato in un auto
 Un esempio:
 ![[epsilon-NFA_esempio2.png]]
 
-ε-closure è UCO in quanto valgono le seguenti proprietà:
+<mark style="background: #BBFABBA6;">ε-closure è UCO in quanto valgono le seguenti proprietà:</mark>
 1. Monotonia:
 	Sia $Q$ un insieme di stati di un ε-NFA. Siano $R$, $S ⊆ Q$. ε-closure è un operatore monotono quindi vale che $(R ⊆ S) ⇒ ε-closure(R) ⊆ ε-closure(S)$.
 2. Idempotenza: 
@@ -209,14 +210,11 @@ Il resto della computazione è analogo a quello degli automi a stati finiti non 
 ---
 
 ## Equivalenza tra DFA e NFA
-Poichè un DFA si può vedere come un NFA in cui $\delta({q,\,a})$ restituisce sempre insiemi costruiti da un solo stato, si ha che ogni linguaggio regolare è un linguaggio accettato da un qualunque NFA.
+Poichè un DFA si può vedere come un NFA in cui $\delta({q,\,a})$ restituisce sempre insiemi costruiti da un solo stato, si ha che <mark style="background: #FFB86CA6;">ogni linguaggio regolare è un linguaggio accettato da un qualunque NFA.</mark>
 
 Dimostriamo che i linguaggi accettati dai DFA e dagli NFA coincidono:
 - DFA $\mathbb\Rightarrow$ NFA
-	Questo lato dell'implicazione è banale; infatti un DFA si può vedere come un NFA in cui per ogni simbolo $a \in \Sigma$ si ha 
-$$
-	\delta({q,\,a}) = \{a\}
-$$
+	Questo lato dell'implicazione è banale; infatti un DFA si può vedere come un NFA in cui per ogni simbolo $a \in \Sigma$ si ha $\delta({q,\,a}) = \{a\}$
 	ovvero la funzione di transizione per NFA restituisce sempre insiemi singoletti.
 
 - NFA $\mathbb\Leftarrow$ DFA
@@ -224,11 +222,11 @@ $$
 	Sia $M = \langle Q,\,\Sigma,\,\delta,\,q_0,\,F \rangle$ un NFA. Allora esiste un DFA $M'$ tale che $L(M) = L(M')$.
 
 ### In parole più semplici
-Esiste un importante teorema (*Robin-Scott*) nella teoria dei linguaggi formali che afferma che ogni NFA può essere convertito in un DFA equivalente, ovvero che accetta lo stesso linguaggio di stringhe.
+<mark style="background: #ABF7F7A6;">Esiste un importante teorema (*Robin-Scott*) nella teoria dei linguaggi formali che afferma che ogni NFA può essere convertito in un DFA equivalente, ovvero che accetta lo stesso linguaggio di stringhe.</mark>
 
 In altre parole, per ogni NFA esiste un DFA equivalente che riconosce lo stesso linguaggio formale. Questo teorema è noto anche come *"teorema di equivalenza DFA-NFA"* ed è fondamentale nella teoria dei linguaggi formali, in quanto permette di utilizzare i DFA (che sono più facili da implementare e analizzare) al posto degli NFA, senza perdere l'espressività del modello.
 
-Il processo di conversione di un NFA in un DFA equivalente si basa sulla costruzione di un DFA che "simula" l'elaborazione dell'input in modo deterministico, esplorando tutte le possibili scelte di transizione dell'NFA. Questo processo è noto come "costruzione di subset" e consiste nel creare un DFA che ha come stati tutti i possibili sottoinsiemi degli stati dell'NFA e come funzione di transizione una combinazione delle transizioni non deterministe dell'NFA.
+<mark style="background: #BBFABBA6;">Il processo di conversione di un NFA in un DFA equivalente si basa sulla costruzione di un DFA che "simula" l'elaborazione dell'input in modo deterministico, esplorando tutte le possibili scelte di transizione dell'NFA.</mark> Questo processo è noto come "costruzione di subset" e consiste nel creare un DFA che ha come stati tutti i possibili sottoinsiemi degli stati dell'NFA e come funzione di transizione una combinazione delle transizioni non deterministe dell'NFA.
 
 Un NFA è più comodo di un DFA: permette di eseguire più ipotesi.
 
@@ -240,13 +238,14 @@ Un NFA è più comodo di un DFA: permette di eseguire più ipotesi.
 Ogni NFA è, per definizione, un caso particolare di un $\varepsilon$-NFA.
 Sia $M = \langle Q,\,\Sigma,\,\delta,\,q_0,\,F \rangle$ un $\varepsilon$-NFA. Allora esiste un NFA $M'$ tale che $L(M) = L(M')$.
 
-#### Eliminazione delle ε-transizioni
+### Eliminazione delle ε-transizioni
 Per semplificare l'automa a stati finiti, si può eliminare le ε-transizioni attraverso una procedura di eliminazione delle ε-transizioni, che consiste in tre passi:
 1. <mark style="background: #FFB8EBA6;">Calcolo dell'epsilon-closure per ogni stato:</mark> per ogni stato dell'automa, si calcola l'epsilon-closure, ovvero l'insieme di tutti gli stati che possono essere raggiunti da esso tramite ε-transizioni.
 2. <mark style="background: #FFB8EBA6;">Creazione di nuove transizioni:</mark> per ogni coppia di stati (p, q) e per ogni simbolo di input a, si crea una nuova transizione da p a q attraverso a se esiste una transizione da p a q attraverso a o se esiste una transizione da uno stato in ε-closure(p) a uno stato in ε-closure(q) attraverso a.
 3. <mark style="background: #FFB8EBA6;">Rimozione delle ε-transizioni:</mark> tutte le ε-transizioni vengono eliminate dall'automa.
 
-In pratica, la procedura di eliminazione delle ε-transizioni permette di semplificare l'automa a stati finiti e di renderlo più facile da analizzare, poiché elimina la presenza di transizioni che non consumano simboli di input. Inoltre, la procedura di eliminazione delle ε-transizioni è importante anche perché permette di convertire un automa a stati finiti con ε-transizioni (ε-NFA) in un automa a stati finiti equivalente senza ε-transizioni (NFA).
+In pratica, la procedura di eliminazione delle ε-transizioni permette di semplificare l'automa a stati finiti e di renderlo più facile da analizzare, poiché elimina la presenza di transizioni che non consumano simboli di input. 
+Inoltre, la procedura di eliminazione delle ε-transizioni è importante anche perché permette di convertire un automa a stati finiti con ε-transizioni (ε-NFA) in un automa a stati finiti equivalente senza ε-transizioni (NFA).
 
 Un esempio:
 ![[epsilon-NFA_esempio3.png]]
