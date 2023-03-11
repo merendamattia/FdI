@@ -170,7 +170,7 @@ Gli epsilon-step e l'epsilon-closure sono due concetti fondamentali nell'ambito 
 
 L'<mark style="background: #FFB86CA6;">ε-step</mark> è un'operazione che permette di spostarsi da uno stato all'altro senza consumare alcun simbolo di input. In pratica, se un automa a stati finiti ha una transizione che utilizza il simbolo epsilon (ε), allora esso può effettuare uno spostamento senza che sia necessario leggere alcun simbolo di input.
 > Definizione formale: 
-> Sia M un ε-NFA definito dalla quintupla $⟨Q, Σ, δ, q0, F ⟩$ e sia $S ∈ ℘(Q)$. L’operatore ε-step: $℘(Q) → ℘(Q)$ è definito come: $$ε-step(S) = {q ∈ Q | ∃p ∈ S . q ∈ δ(p,ε)}.$$
+> Sia M un ε-NFA definito dalla quintupla $⟨Q, Σ, δ, q0, F ⟩$ e sia $S ∈ ℘(Q)$. L’operatore ε-step: $℘(Q) → ℘(Q)$ è definito come: $$\varepsilon\text{-step}(S) = {q ∈ Q\; | \;∃p ∈ S\; . \; q ∈ δ(p,\,\varepsilon)}.$$
 
 Un esempio:
 ![[epsilon-NFA_esempio.png]]
