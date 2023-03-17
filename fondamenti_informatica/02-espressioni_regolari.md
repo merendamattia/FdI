@@ -2,7 +2,6 @@
 ```toc
 ```
 ---
-<mark style="background: #FFF3A3A6;">TODO: da sistemare le espressioni in latex</mark>
 
 ## Sintassi e semantica
 La sintassi e la semantica sono concetti fondamentali dell'informatica teorica e sono strettamente correlati.
@@ -61,7 +60,8 @@ mentre la chiusura positiva di $L$, denotata come $L^+$ è l'insieme:  <mark sty
 
 Quindi la chiusura di Kleene è un *UCO*.
 
-> *UCO* è l'acronimo di *"Unione, Chiusura di Kleene e Concatenazione"*, che sono le tre operazioni fondamentali nell'algebra delle espressioni regolari. Queste operazioni sono considerate UCO in quanto sono sufficienti per definire tutte le espressioni regolari possibili.
+> *UCO* è l'acronimo di *"Operatore di chiusura superiore"*, e comprende le tre operazioni fondamentali nell'algebra delle espressioni regolari (idempotenza, monotonia ed estensività). 
+> Queste operazioni sono considerate UCO in quanto sono sufficienti per definire tutte le espressioni regolari possibili.
 
 [_Torna all'indice_](#espressioni%20regolari)
 
@@ -77,3 +77,9 @@ Sia Σ un alfabeto. Le <mark style="background: #FFB86CA6;">espressioni regolari
 6.  Se r è una espressione regolare su Σ, $r^∗$ è una espressione regolare su Σ.
 
 > Un'*espressione regolare* è una notazione formale utilizzata per descrivere pattern di stringhe. In pratica, è un insieme di simboli che permette di definire in modo preciso quali stringhe appartengono a un determinato insieme.
+
+<mark style="background: #FFF3A3A6;">TODO (?): da aggiungere definizione (da file tutorato) 4.7, 4.8, 4.9</mark>
+
+
+<mark style="background: #FFF3A3A6;">TODO: da sistemare le espressioni in latex</mark>
+<mark style="background: #FFF3A3A6;">TODO: da aggiungere esempio fatto negli ultimi 5 minuti di lezione</mark>
