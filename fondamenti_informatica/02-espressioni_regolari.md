@@ -10,7 +10,7 @@ La <mark style="background: #FFB86CA6;">sintassi</mark> si riferisce alla strutt
 
 La <mark style="background: #FFB86CA6;">semantica</mark>, d'altra parte, si riferisce al significato del linguaggio, ovvero a ciò che il linguaggio esprime e come viene interpretato. Nella teoria delle espressioni regolari, la semantica definisce il significato delle espressioni regolari, ovvero l'insieme di stringhe che soddisfano l'espressione regolare.
 
-Ad esempio, consideriamo l'espressione regolare `(a+b)*abb`, dove '`+`' indica l'operatore di unione e '`*`' indica la ripetizione zero o più volte. La sintassi di questa espressione regolare definisce la struttura formale dell'espressione regolare, ovvero l'uso di parentesi e operatori. La semantica definisce il significato dell'espressione regolare, ovvero l'insieme di tutte le stringhe che iniziano con zero o più occorrenze di `"a"` o `"b"` e terminano con la sequenza `"abb".`
+Ad esempio, consideriamo l'espressione regolare $(a+b)^*abb$, dove '`+`' indica l'operatore di unione e '`*`' indica la ripetizione zero o più volte. La sintassi di questa espressione regolare definisce la struttura formale dell'espressione regolare, ovvero l'uso di parentesi e operatori. La semantica definisce il significato dell'espressione regolare, ovvero l'insieme di tutte le stringhe che iniziano con zero o più occorrenze di `"a"` o `"b"` e terminano con la sequenza `"abb".`
 
 In <mark style="background: #FFF3A3A6;">sintesi</mark>, la sintassi si riferisce alla forma del linguaggio, mentre la semantica si riferisce al significato del linguaggio. La sintassi e la semantica sono entrambe importanti per comprendere il funzionamento dei linguaggi formali come le espressioni regolari.
 
@@ -44,23 +44,37 @@ Notare che:
 - essendo ε la stringa nulla su qualsiasi alfabeto Σ, { ε } ⊆ Σ∗ dunque { ε } è un linguaggio su qualsiasi alfabeto.
 
 Siano Σ un alfabeto e $L_1$, $L_2$ ⊆ $Σ^*$ linguaggi, la <mark style="background: #FFB86CA6;">concatenazione</mark> di $L_1$ e $L_2$, denotata con L1 · L2, è l’insieme:
-$$L_1 \cdot L_2 :={x \cdot y | x ∈ L_1, y∈L_2}.$$
+$$L_1 \cdot L_2 :=\left\{ {x \cdot y \;|\; x ∈ L_1, y∈L_2} \right\}.$$
 <mark style="background: #FFF3A3A6;">TODO: da aggiungere definizione concatenazione iterata</mark>
 > La *concatenazione* viene utilizzata per unire due o più pattern di caratteri in un'unica espressione regolare.
 
-<mark style="background: #FFB86CA6;">La chiusura di Kleene</mark> di $L$, denotata come $L^*$ è l'insieme: <mark style="background: #FFF3A3A6;">TODO: da aggiungere formula in LaTeX</mark>
-mentre la chiusura positiva di $L$, denotata come $L^+$ è l'insieme:  <mark style="background: #FFF3A3A6;">TODO: da aggiungere formula in LaTeX</mark>
-
+Definiamo ora (*Concatenazione iterata*):
+$$
+\begin{equation*}
+	\left\{\begin{array}{ll}
+		L^0 &= \{\varepsilon\} \\
+		L^{i+1} &= LL^i
+	\end{array}\right. \quad \forall i \in \mathbb{N}
+\end{equation*}
+$$
+<mark style="background: #FFB86CA6;">La chiusura di Kleene</mark> di $L$, denotata come $L^*$ è l'insieme: 
+$$
+	L^* = \bigcup_{i \geq 0}{L^i}
+$$
+mentre la chiusura positiva di $L$, denotata come $L^+$ è l'insieme: 
+$$
+	L^+ = \bigcup_{i \geq 1}{L^i}
+$$
 > La *chiusura di Kleene* è un simbolo `*` che viene aggiunto alla fine di un elemento o di un gruppo di elementi nell'espressione regolare per indicare che l'elemento o il gruppo di elementi può essere ripetuto zero o più volte.
 
 <mark style="background: #ABF7F7A6;">Proprietà della chiusura di Kleene:</mark>
-1. Idempotenza: $(L^*)^* = L^*L^* = L^*.$
+1. Idempotenza: $(L^*)^* = L^*.$
 2. Monotonia: $L ⊆ M ⇒ L^∗ ⊆ M^∗$.
 3. Estensività: $L ⊆ L^∗$.
 
-Quindi la chiusura di Kleene è un *UCO*.
+Quindi la chiusura di Kleene è un **UCO** (*Upper Closure Operator*) .
 
-> *UCO* è l'acronimo di *"Operatore di chiusura superiore"*, e comprende le tre operazioni fondamentali nell'algebra delle espressioni regolari (idempotenza, monotonia ed estensività). 
+> *UCO* è l'acronimo di *"Operatore di chiusura superiore"*, e comprende le tre operazioni fondamentali nell'algbra delle espressioni regolari (idempotenza, monotonia ed estensività). 
 > Queste operazioni sono considerate UCO in quanto sono sufficienti per definire tutte le espressioni regolari possibili.
 
 [_Torna all'indice_](#espressioni%20regolari)
@@ -78,8 +92,32 @@ Sia Σ un alfabeto. Le <mark style="background: #FFB86CA6;">espressioni regolari
 
 > Un'*espressione regolare* è una notazione formale utilizzata per descrivere pattern di stringhe. In pratica, è un insieme di simboli che permette di definire in modo preciso quali stringhe appartengono a un determinato insieme.
 
-<mark style="background: #FFF3A3A6;">TODO (?): da aggiungere definizione (da file tutorato) 4.7, 4.8, 4.9</mark>
+---
 
+Ci sono altri modi di descrivere la <mark style="background: #FFB86CA6;">sintassi</mark> di una espressione regolare; uno di questi utilizza la grammatica in forma <mark style="background: #FF5582A6;">BNF</mark> (*Backus-Naur form*).
+Dato $\Sigma := \left\{a_1 \ldots a_n \right\}$ un alfabeto, un'espressione regolare su $\Sigma$ è una qualunque stringa generata dalla seguente grammatica
+$$
+	E := a_1 \;|\; \ldots \;|\; a_n \;|\; 
+		\underline{\varepsilon} \;|\; \underline{\varnothing} \;|\;
+		E_1 \underline{+} E_2 \;|\; E_1 \underline{\cdot} E_2 \;|\; E^*
+$$
+---
 
-<mark style="background: #FFF3A3A6;">TODO: da sistemare le espressioni in latex</mark>
-<mark style="background: #FFF3A3A6;">TODO: da aggiungere esempio fatto negli ultimi 5 minuti di lezione</mark>
+Per quanto riguarda la <mark style="background: #FFB86CA6;">semantica</mark> di un'espressione regolare, usiamo la definizione di *fa match*.
+Dato $\Sigma := \left\{a_1 \ldots a_n \right\}$ un alfabeto e $r$ un'espressione regolare su $\Sigma$, si dice che una stringa $x \in \Sigma^*$ fa match con $r$, scritto $x \lessdot r$, se:
+1. $a \lessdot a$, se $a \in \Sigma$ (un simbolo dell'alfabeto fa match con se stesso)
+2. $\varepsilon \lessdot \underline{\varepsilon}$ (la stringa vuota fa match con il simbolo che la denota)
+3. $x \, \mathrlap{\nless}\,\cdot \, \underline{\varnothing}$, per ogni $x \in \Sigma^*$
+4. $x \lessdot r_1 \underline{+} r_2$, se $x \lessdot r_1$ o $x \lessdot r_2$
+5. $x \lessdot r_1 \underline{\cdot} r_2$, se esistono $y,z \in \Sigma^*$ tali che $x=y \cdot z ,\; y \lessdot r_1,\, z \lessdot r_2$
+6. $x \lessdot r^*$, se $x \lessdot \varepsilon$ oppure esistono $y,z \in \Sigma^*$ tali che $x=y \cdot z ,\; y \lessdot r,\, z \lessdot r^*$
+
+---
+
+Deto $\Sigma$ un alfabeto e $r$ una espressione regolare su di esso, definiamo il <mark style="background: #ABF7F7A6;">Linguaggio denotato da una espressione regolare</mark> $r$ come
+$$
+	L(r) = [\![ r ]\!] := \left\{ {x \in \Sigma^* \;|\; x \lessdot r} \right\}  
+$$
+quindi un <mark style="background: #FF5582A6;">linguaggio</mark> $L$ <mark style="background: #FF5582A6;">è regolare</mark> se esiste almeno una espressione regolare $r$ che lo denota.
+
+[_Torna all'indice_](#espressioni%20regolari)
