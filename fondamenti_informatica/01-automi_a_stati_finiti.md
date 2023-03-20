@@ -10,7 +10,7 @@ Alcune definizioni.
 -   _Stringa_ (o _parola_): una sequenza finita di simboli giustapposti (uno dietro l’altro)    
 -   _Lunghezza_ di una stringa $w$: si denota con $|w|$ ed è il numero di _occorrenze_ di simboli che compongono una stringa. La stringa vuota, costituita da zero simboli, si denota con $\epsilon$ e $|\epsilon| = 0$.
 
-![prefix](./images/prefix.jpg)
+![prefix](prefix.jpg)
 
 La _concatenazione_ di due stringhe $v, w$ è la stringa $vw$ che si ottiene facendo seguire alla prima la seconda; è un’operazione associativa.
 

@@ -45,7 +45,7 @@ Notare che:
 
 Siano Σ un alfabeto e $L_1$, $L_2$ ⊆ $Σ^*$ linguaggi, la <mark style="background: #FFB86CA6;">concatenazione</mark> di $L_1$ e $L_2$, denotata con L1 · L2, è l’insieme:
 $$L_1 \cdot L_2 :=\left\{ {x \cdot y \;|\; x ∈ L_1, y∈L_2} \right\}.$$
-<mark style="background: #FFF3A3A6;">TODO: da aggiungere definizione concatenazione iterata</mark>
+
 > La *concatenazione* viene utilizzata per unire due o più pattern di caratteri in un'unica espressione regolare.
 
 Definiamo ora (*Concatenazione iterata*):
@@ -92,18 +92,16 @@ Sia Σ un alfabeto. Le <mark style="background: #FFB86CA6;">espressioni regolari
 
 > Un'*espressione regolare* è una notazione formale utilizzata per descrivere pattern di stringhe. In pratica, è un insieme di simboli che permette di definire in modo preciso quali stringhe appartengono a un determinato insieme.
 
----
-
-Ci sono altri modi di descrivere la <mark style="background: #FFB86CA6;">sintassi</mark> di una espressione regolare; uno di questi utilizza la grammatica in forma <mark style="background: #FF5582A6;">BNF</mark> (*Backus-Naur form*).
+### Sintassi e semantica
+Ci sono altri modi di descrivere la <mark style="background: #FFB8EBA6;">sintassi</mark> di una espressione regolare; uno di questi utilizza la grammatica in forma <mark style="background: #BBFABBA6;">BNF</mark> (*[Backus-Naur form](https://it.wikipedia.org/wiki/Backus-Naur_Form)*).
 Dato $\Sigma := \left\{a_1 \ldots a_n \right\}$ un alfabeto, un'espressione regolare su $\Sigma$ è una qualunque stringa generata dalla seguente grammatica
 $$
 	E := a_1 \;|\; \ldots \;|\; a_n \;|\; 
 		\underline{\varepsilon} \;|\; \underline{\varnothing} \;|\;
 		E_1 \underline{+} E_2 \;|\; E_1 \underline{\cdot} E_2 \;|\; E^*
 $$
----
 
-Per quanto riguarda la <mark style="background: #FFB86CA6;">semantica</mark> di un'espressione regolare, usiamo la definizione di *fa match*.
+Per quanto riguarda la <mark style="background: #FFB8EBA6;">semantica</mark> di un'espressione regolare, usiamo la definizione di *fa match*.
 Dato $\Sigma := \left\{a_1 \ldots a_n \right\}$ un alfabeto e $r$ un'espressione regolare su $\Sigma$, si dice che una stringa $x \in \Sigma^*$ fa match con $r$, scritto $x \lessdot r$, se:
 1. $a \lessdot a$, se $a \in \Sigma$ (un simbolo dell'alfabeto fa match con se stesso)
 2. $\varepsilon \lessdot \underline{\varepsilon}$ (la stringa vuota fa match con il simbolo che la denota)
@@ -112,12 +110,27 @@ Dato $\Sigma := \left\{a_1 \ldots a_n \right\}$ un alfabeto e $r$ un'espressione
 5. $x \lessdot r_1 \underline{\cdot} r_2$, se esistono $y,z \in \Sigma^*$ tali che $x=y \cdot z ,\; y \lessdot r_1,\, z \lessdot r_2$
 6. $x \lessdot r^*$, se $x \lessdot \varepsilon$ oppure esistono $y,z \in \Sigma^*$ tali che $x=y \cdot z ,\; y \lessdot r,\, z \lessdot r^*$
 
----
-
-Deto $\Sigma$ un alfabeto e $r$ una espressione regolare su di esso, definiamo il <mark style="background: #ABF7F7A6;">Linguaggio denotato da una espressione regolare</mark> $r$ come
+Deto $\Sigma$ un alfabeto e $r$ una espressione regolare su di esso, definiamo il <mark style="background: #FFB86CA6;">linguaggio denotato da una espressione regolare</mark> $r$ come
 $$
 	L(r) = [\![ r ]\!] := \left\{ {x \in \Sigma^* \;|\; x \lessdot r} \right\}  
 $$
-quindi un <mark style="background: #FF5582A6;">linguaggio</mark> $L$ <mark style="background: #FF5582A6;">è regolare</mark> se esiste almeno una espressione regolare $r$ che lo denota.
+quindi un <mark style="background: #ABF7F7A6;">linguaggio <i>L</i> è regolare</mark> se esiste almeno una espressione regolare $r$ che lo denota, ovvero $$L = L(r)$$
+[_Torna all'indice_](#espressioni%20regolari)
+
+---
+
+## Equivalenza tra DFA e ER
+Sia $r$ una espressione regolare. Allora esiste un $\epsilon \text{-NFA } M$ tale che $L(M) = L(r)$.   
+[Dimostrazione teorema 4.4 (McNaughton & Yamada, 1960).](obsidian://open?vault=FdI&file=fondamenti_informatica%2Fdata%2Fpdf%2Fdim_th_4-4.pdf)
+
+> Il teorema di McNaughton e Yamada stabilisce che ogni linguaggio regolare può essere rappresentato da un'espressione regolare e da un deterministico automa a stati finiti (DFA), e viceversa. In altre parole, ogni linguaggio regolare può essere descritto in modo equivalente da un'espressione regolare o da un DFA.
+
+> La dimostrazione del teorema si basa sulla costruzione di un DFA per un'espressione regolare data e viceversa.
+> L'idea di base dell'*algoritmo di eliminazione degli stati* è quella di eliminare uno stato alla volta dal DFA, sostituendolo con un'espressione regolare che descrive il comportamento del DFA senza lo stato eliminato. Questa espressione regolare può essere costruita combinando le transizioni in ingresso e in uscita dallo stato eliminato in un modo specifico, in modo da mantenere l'equivalenza con il DFA originale.
+
+Sia $M$ un DFA. Allora esiste una espressione regolare $r$ tale che $L(M) = L(r)$. 
+[Dimostrazione teorema 4.6.](obsidian://open?vault=FdI&file=fondamenti_informatica%2Fdata%2Fpdf%2Fdim_th_4-6.pdf)
+
+<mark style="background: #FFF3A3A6;">TODO: da finire e sistemare</mark>
 
 [_Torna all'indice_](#espressioni%20regolari)
