@@ -129,7 +129,7 @@ Sia $r$ una espressione regolare. Allora esiste un $\epsilon \text{-NFA } M$ tal
 > L'idea di base dell'*algoritmo di eliminazione degli stati* è quella di eliminare uno stato alla volta dal DFA, sostituendolo con un'espressione regolare che descrive il comportamento del DFA senza lo stato eliminato. Questa espressione regolare può essere costruita combinando le transizioni in ingresso e in uscita dallo stato eliminato in un modo specifico, in modo da mantenere l'equivalenza con il DFA originale.
 
 Sia $M$ un DFA. Allora esiste una espressione regolare $r$ tale che $L(M) = L(r)$. 
-[Dimostrazione teorema 4.6.](obsidian://open?vault=FdI&file=fondamenti_informatica%2Fdata%2Fpdf%2Fdim_th_4-6.pdf)
+[Dimostrazione teorema 4.6.](./data/pdf/dim_th_4-6.pdf)
 
 <mark style="background: #FFF3A3A6;">TODO: da finire e sistemare</mark>
 
