@@ -11,10 +11,10 @@ Sia $L$ un linguaggio regolare. Allora esiste una costante $n \in \mathbb{N}$ ta
 3. $|v| > 0$,
 4. per ogni $i \geq 0$ vale che $uv^iw \in L$.
 
-[Dimostrazione lemma 5.1 (Bar-Hillel, Perles, Shamir, 1961).](obsidian://open?vault=FdI&file=fondamenti_informatica%2Fdata%2Fpdf%2Fdim_lemma_5-1.pdf)
+[[dim_lemma_5-1.pdf | Dimostrazione lemma 5.1 (Bar-Hillel, Perles, Shamir, 1961).]]
 
 > Corollario 5.2: $n$ del Lemma 5.1 può essere preso come numero di stati del più piccolo automa riconoscente $L$.
-> [Dimostrazione corollario 5.2.](obsidian://open?vault=FdI&file=fondamenti_informatica%2Fdata%2Fpdf%2Fdim_coroll_5-2.pdf)
+> [[dim_coroll_5-2.pdf|Dimostrazione corollario 5.2.]]
 
 Esempio:
 ![[linguaggio_non_regolare.png]]

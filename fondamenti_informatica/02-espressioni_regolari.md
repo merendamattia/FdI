@@ -121,7 +121,7 @@ quindi un <mark style="background: #ABF7F7A6;">linguaggio <i>L</i> è regolare</
 
 ## Equivalenza tra DFA e ER
 Sia $r$ una espressione regolare. Allora esiste un $\epsilon \text{-NFA } M$ tale che $L(M) = L(r)$.   
-[Dimostrazione teorema 4.4 (McNaughton & Yamada, 1960).](obsidian://open?vault=FdI&file=fondamenti_informatica%2Fdata%2Fpdf%2Fdim_th_4-4.pdf)
+[[dim_th_4-4.pdf|Dimostrazione teorema 4.4 (McNaughton & Yamada, 1960).]]
 
 > Il teorema di McNaughton e Yamada stabilisce che ogni linguaggio regolare può essere rappresentato da un'espressione regolare e da un deterministico automa a stati finiti (DFA), e viceversa. In altre parole, ogni linguaggio regolare può essere descritto in modo equivalente da un'espressione regolare o da un DFA.
 
@@ -129,7 +129,10 @@ Sia $r$ una espressione regolare. Allora esiste un $\epsilon \text{-NFA } M$ tal
 > L'idea di base dell'*algoritmo di eliminazione degli stati* è quella di eliminare uno stato alla volta dal DFA, sostituendolo con un'espressione regolare che descrive il comportamento del DFA senza lo stato eliminato. Questa espressione regolare può essere costruita combinando le transizioni in ingresso e in uscita dallo stato eliminato in un modo specifico, in modo da mantenere l'equivalenza con il DFA originale.
 
 Sia $M$ un DFA. Allora esiste una espressione regolare $r$ tale che $L(M) = L(r)$. 
-[Dimostrazione teorema 4.6.](./data/pdf/dim_th_4-6.pdf)
+
+[[dim_th_4-6.pdf|Dimostrazione teorema 4.6]]
+
+![[nfa-dfa-re.svg]]
 
 <mark style="background: #FFF3A3A6;">TODO: da finire e sistemare</mark>
 
