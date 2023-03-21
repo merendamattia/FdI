@@ -131,6 +131,8 @@ Sia $r$ una espressione regolare. Allora esiste un $\epsilon \text{-NFA } M$ tal
 Sia $M$ un DFA. Allora esiste una espressione regolare $r$ tale che $L(M) = L(r)$. 
 [Dimostrazione teorema 4.6.](obsidian://open?vault=FdI&file=fondamenti_informatica%2Fdata%2Fpdf%2Fdim_th_4-6.pdf)
 
+![[nfa-dfa-re.svg]]
+
 <mark style="background: #FFF3A3A6;">TODO: da finire e sistemare</mark>
 
 [_Torna all'indice_](#espressioni%20regolari)
