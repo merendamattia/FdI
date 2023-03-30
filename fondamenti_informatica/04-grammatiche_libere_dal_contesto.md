@@ -1,0 +1,120 @@
+# Grammatiche libere dal contesto
+```toc
+```
+---
+
+#todo 
+- [x] evidenziare
+- [ ] aggiungere torna all'indice
+- [ ] da sistemare le diciture in latex
+- [ ] Da aggiungere 4. Ambiguità delle derivazioni
+- [ ] Da aggiungere 5. Semplificazione
+
+## Definizione formale
+Una <mark style="background: #FFB86CA6;">grammatica</mark> è un insieme di regole che oermettono di generare un linguaggio. 
+Le grammatiche sono composte da un insieme di simboli chiamati <mark style="background: #ABF7F7A6;">terminali</mark> (o parole del linguaggio) e un insieme di simboli chiamati <mark style="background: #ABF7F7A6;">non terminali</mark> (o categorie sintattiche) che rappresentano classi di parole o frasi.
+
+<mark style="background: #BBFABBA6;">Le grammatiche libere dal contesto (CF)</mark>, o grammatiche *context-free* in inglese, sono un tipo di grammatica formale in cui ogni regola di produzione ha la forma $A → α$, dove $A$ è un simbolo non terminale e $α$ è una stringa di simboli terminali e/o non terminali. 
+In altre parole, in una grammatica *context-free*, ogni non terminale può essere sostituito con qualsiasi stringa di simboli terminali e non terminali.
+
+### A cosa servono e perchè sono importanti?
+Le grammatiche *context-free* <mark style="background: #FFB8EBA6;">sono importanti perché</mark> sono utilizzate per descrivere la sintassi di molti linguaggi di programmazione, dove le regole grammaticali definiscono come costruire programmi corretti sintatticamente. Inoltre, le grammatiche *context-free* sono utilizzate in molte altre applicazioni, come il parsing di linguaggi naturali, l'analisi sintattica di frasi, la definizione di formati di file, e molto altro ancora.
+
+Per quanto riguarda il loro utilizzo nel campo della programmazione, le grammatiche *context-free* sono spesso utilizzate per la generazione di compilatori e interpreti. In particolare, vengono utilizzate per definire la sintassi di un linguaggio di programmazione, cioè come vengono costruite le espressioni e le istruzioni in quel linguaggio. Questo è importante perché un compilatore o un interprete devono essere in grado di capire il codice scritto in un certo linguaggio di programmazione e tradurlo in un formato comprensibile per il computer.
+
+Inoltre, le grammatiche *context-free* possono essere utilizzate anche per verificare la correttezza sintattica di un programma, ovvero per verificare che il codice scritto rispetti le regole grammaticali del linguaggio di programmazione. Questo è importante perché consente di identificare eventuali errori di sintassi nel codice prima della sua esecuzione, riducendo il rischio di errori e migliorando la sicurezza del programma.
+
+[_Torna all'indice_](#grammatiche%20libere%20dal%20contesto)
+
+### Notazioni generali
+![[grammatiche_notazioni_generali.png | 700]]
+
+[_Torna all'indice_](#grammatiche%20libere%20dal%20contesto)
+
+### Produzione
+In una grammatica formale, una <mark style="background: #D2B3FFA6;">produzione</mark> (o regola di produzione) è una descrizione formale di come una stringa di simboli può essere trasformata in un'altra stringa di simboli. Le produzioni sono utilizzate per definire la struttura sintattica della lingua descritta dalla grammatica.
+
+Una produzione è rappresentata da una regola della forma $A → B$, dove $A$ è un simbolo non terminale e $B$ è una stringa di simboli terminali e/o non terminali. La produzione indica che il simbolo $A$ può essere sostituito con la stringa $B$.
+
+Ad esempio, consideriamo la seguente grammatica *context-free*:
+$$S → aSb \;| \; ε$$
+In questa grammatica, $S$ è un simbolo non terminale e $a$, $b$ sono simboli terminali. Questa grammatica descrive un linguaggio che contiene tutte le stringhe di $a$ e $b$ che sono bilanciate rispetto al numero di $a$ e $b$, ovvero tutte le stringhe in cui il numero di a è uguale al numero di $b$.
+
+La prima produzione $S → aSb$ indica che il simbolo $S$ può essere sostituito con la stringa $aSb$, ovvero che possiamo aggiungere un $a$ all'inizio e un $b$ alla fine della stringa $S$. La seconda produzione $S → ε$ indica che il simbolo $S$ può essere sostituito con la stringa vuota, ovvero che la stringa può essere lasciata vuota.
+
+Utilizzando queste produzioni, possiamo derivare tutte le stringhe del linguaggio, partendo dal simbolo iniziale $S$ e applicando le produzioni in modo ricorsivo. 
+Ad esempio, partendo dal simbolo $S$, possiamo derivare la stringa $abb$ in questo modo:
+$$S → aSb → aaSbb → aabbb$$
+In questo modo, le produzioni sono fondamentali per la definizione della grammatica e per la generazione di tutte le stringhe che appartengono al linguaggio descritto dalla grammatica stessa.
+
+[_Torna all'indice_](#grammatiche%20libere%20dal%20contesto)
+
+---
+
+## Linguaggio generato
+Il <mark style="background: #FFB86CA6;">linguaggio generato da una grammatica</mark> è l'insieme di tutte le stringhe che possono essere generate dalla grammatica stessa, seguendo le sue regole di produzione.
+
+In altre parole, il linguaggio generato da una grammatica è l'insieme di tutte le stringhe che possono essere ottenute partendo dal simbolo iniziale della grammatica e applicando le produzioni della grammatica in modo ricorsivo.
+
+Ad esempio, consideriamo la seguente grammatica *context-free*:
+$$S → AB$$
+$$A → a$$
+$$B → b | ε$$
+Questa grammatica genera un linguaggio che contiene tutte le stringhe che iniziano con la lettera "a" e terminano con la lettera "b" oppure sono composte solo dalla lettera "a".
+
+Possiamo generare le stringhe del linguaggio partendo dal simbolo iniziale S e applicando le produzioni della grammatica. Ad esempio, possiamo derivare la stringa "ab" in questo modo:
+$$S → AB → aB → ab$$
+La <mark style="background: #BBFABBA6;">nozione di derivazione di un passo</mark> è il processo di applicazione di una sola produzione della grammatica per generare una nuova stringa a partire da una stringa esistente.
+
+Ad esempio, consideriamo la seguente grammatica *context-free*:
+$$S → AB A → a B → b \;|  \; ε$$
+Se abbiamo la stringa "a" e vogliamo derivare la stringa "ab", possiamo applicare una sola produzione $B → b$ per generare la nuova stringa "ab". Questo è un esempio di derivazione di un passo.
+
+La derivazione di un passo è utile perché ci consente di generare nuove stringhe del linguaggio passo dopo passo, a partire dal simbolo iniziale o da altre stringhe già generate. In questo modo, possiamo generare tutte le stringhe del linguaggio generato dalla grammatica.
+
+[_Torna all'indice_](#grammatiche%20libere%20dal%20contesto)
+
+### Equivalenza tra due grammatiche
+<mark style="background: #ABF7F7A6;">Due grammatiche sono equivalenti se descrivono lo stesso linguaggio</mark>, ovvero se generano lo stesso insieme di stringhe. Ciò significa che se due grammatiche sono equivalenti, allora entrambe descrivono lo stesso insieme di stringhe, e ogni stringa generata da una delle due grammatiche può essere generata anche dall'altra grammatica.
+
+Per verificare se due grammatiche sono equivalenti, ci sono diversi approcci. Uno di questi è quello di controllare se entrambe le grammatiche generano le stesse stringhe. Questo può essere fatto generando tutte le stringhe che possono essere generate dalle due grammatiche e confrontandole tra loro.
+
+Un altro modo per verificare l'equivalenza tra due grammatiche è quello di convertirle entrambe in forme normali normali, ad esempio la [forma normale di Chomsky](https://it.wikipedia.org/wiki/Forma_normale_di_Chomsky) o la [forma normale di Greibach](https://it.wikipedia.org/wiki/Forma_normale_di_Greibach), e quindi confrontare le due forme normali. Le due grammatiche sono equivalenti se e solo se le loro forme normali sono equivalenti.
+
+L'equivalenza tra due grammatiche è importante perché garantisce che descrivono lo stesso linguaggio e che quindi generano le stesse stringhe. Questo è essenziale per garantire la correttezza e la precisione nella descrizione del linguaggio. 
+
+> Inoltre, l'equivalenza tra due grammatiche è importante per la progettazione di algoritmi di parsing e di altre tecniche di analisi del linguaggio, poiché queste tecniche devono funzionare in modo corretto per qualsiasi grammatica equivalente.
+
+[_Torna all'indice_](#grammatiche%20libere%20dal%20contesto)
+
+---
+
+## Alberi di derivazione
+Un <mark style="background: #FFB86CA6;">albero di derivazione</mark> è una rappresentazione grafica di una derivazione di una stringa da parte di una grammatica. In altre parole, un albero di derivazione mostra come una data stringa può essere generata a partire dal simbolo iniziale della grammatica, seguendo le regole di produzione della grammatica stessa.
+
+L'albero di derivazione è costituito da un insieme di nodi e archi, dove i nodi rappresentano i simboli della stringa generata e le produzioni della grammatica che vengono applicate, mentre gli archi rappresentano la relazione tra i simboli generati e i simboli della stringa.
+
+In un albero di derivazione, il nodo radice rappresenta il simbolo iniziale della grammatica, mentre le foglie rappresentano i simboli terminali della stringa generata. Ogni nodo interno rappresenta invece l'applicazione di una produzione della grammatica.
+
+In un albero di derivazione, ogni vertice, o nodo, ha un'<mark style="background: #BBFABBA6;">etichetta</mark> che indica il simbolo o la produzione della grammatica che il nodo rappresenta. L'etichetta è necessaria per capire il ruolo del nodo all'interno dell'albero e per ricostruire la derivazione della stringa.
+
+[_Torna all'indice_](#grammatiche%20libere%20dal%20contesto)
+
+### Utilità e importanza
+<mark style="background: #FFB8EBA6;">L'importanza</mark> degli alberi di derivazione è legata al fatto che ci consentono di comprendere meglio come una stringa può essere generata a partire da una grammatica. Inoltre, gli alberi di derivazione sono spesso utilizzati come strumento di analisi del linguaggio, ad esempio per verificare se una data stringa appartiene o meno al linguaggio generato dalla grammatica.
+
+Un <mark style="background: #ABF7F7A6;">albero di derivazione con radici etichettate</mark> è un tipo particolare di albero di derivazione in cui ogni nodo è etichettato con la produzione della grammatica che viene applicata. Questo tipo di albero è utile perché consente di visualizzare in modo più chiaro le produzioni che vengono applicate durante la derivazione.
+
+[_Torna all'indice_](#grammatiche%20libere%20dal%20contesto)
+
+### Esempio
+Consideriamo la seguente grammatica context-free:
+$$S → aSb \;| \;ε$$
+Per generare la stringa "aabbb", possiamo costruire il seguente albero di derivazione:
+
+![[alberi_derivazione_esempio.png | 400]]
+
+In questo albero, il nodo radice rappresenta il simbolo iniziale S, mentre i nodi figli rappresentano le produzioni che sono state applicate. In questo caso, abbiamo applicato la produzione 
+$S → aSb$, quindi abbiamo aggiunto un nodo "a" come figlio del nodo radice e un altro nodo S come secondo figlio del nodo radice. In seguito, abbiamo applicato la produzione $S → ε$ al secondo figlio del nodo radice, che ha quindi generato un nodo vuoto. Infine, abbiamo applicato la produzione $S → b$ al secondo figlio del nodo radice, che ha generato il nodo "b". Alla fine, abbiamo ottenuto la stringa "aabbb" concatenando i nodi terminali dell'albero.
+
+---
