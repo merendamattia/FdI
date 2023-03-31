@@ -4,11 +4,7 @@
 ---
 
 #todo 
-- [x] evidenziare
-- [ ] aggiungere torna all'indice
 - [ ] da sistemare le diciture in latex
-- [ ] Da aggiungere 4. Ambiguità delle derivazioni
-- [ ] Da aggiungere 5. Semplificazione
 
 ## Definizione formale
 Una <mark style="background: #FFB86CA6;">grammatica</mark> è un insieme di regole che oermettono di generare un linguaggio. 
@@ -57,9 +53,11 @@ Il <mark style="background: #FFB86CA6;">linguaggio generato da una grammatica</m
 In altre parole, il linguaggio generato da una grammatica è l'insieme di tutte le stringhe che possono essere ottenute partendo dal simbolo iniziale della grammatica e applicando le produzioni della grammatica in modo ricorsivo.
 
 Ad esempio, consideriamo la seguente grammatica *context-free*:
-$$S → AB$$
-$$A → a$$
-$$B → b | ε$$
+```css
+S -> AB
+A -> a
+B -> b | ε
+```
 Questa grammatica genera un linguaggio che contiene tutte le stringhe che iniziano con la lettera "a" e terminano con la lettera "b" oppure sono composte solo dalla lettera "a".
 
 Possiamo generare le stringhe del linguaggio partendo dal simbolo iniziale S e applicando le produzioni della grammatica. Ad esempio, possiamo derivare la stringa "ab" in questo modo:
@@ -117,4 +115,127 @@ Per generare la stringa "aabbb", possiamo costruire il seguente albero di deriva
 In questo albero, il nodo radice rappresenta il simbolo iniziale S, mentre i nodi figli rappresentano le produzioni che sono state applicate. In questo caso, abbiamo applicato la produzione 
 $S → aSb$, quindi abbiamo aggiunto un nodo "a" come figlio del nodo radice e un altro nodo S come secondo figlio del nodo radice. In seguito, abbiamo applicato la produzione $S → ε$ al secondo figlio del nodo radice, che ha quindi generato un nodo vuoto. Infine, abbiamo applicato la produzione $S → b$ al secondo figlio del nodo radice, che ha generato il nodo "b". Alla fine, abbiamo ottenuto la stringa "aabbb" concatenando i nodi terminali dell'albero.
 
+[_Torna all'indice_](#grammatiche%20libere%20dal%20contesto)
+
 ---
+
+## Ambiguità delle derivazioni
+Una derivazione di una stringa è detta <mark style="background: #FFB86CA6;">ambigua</mark> se esistono più alberi di derivazione per la stessa stringa generati dalla stessa grammatica. Questo accade quando una stringa può essere generata da una grammatica in modi diversi, ovvero attraverso differenti sequenze di produzioni.
+
+Per esempio, consideriamo la grammatica context-free $$S → S + S \; |\; S * S \;|\; a$$che genera espressioni aritmetiche con addizione e moltiplicazione. Se consideriamo l'espressione "a + a * a", ci sono due possibili alberi di derivazione:
+
+![[ambiguita_alberi_derivazioni.png | 600]]
+
+<mark style="background: #ABF7F7A6;">In questo caso, la presenza di più alberi di derivazione per la stessa espressione genera ambiguità nella grammatica.</mark> Inoltre, è importante notare che l'albero di derivazione sinistro e quello destro generano espressioni aritmetiche diverse, poiché la prima espressione corrisponde a "(a+a)_a", mentre la seconda corrisponde a "a+(a*a)".
+
+Una derivazione si dice sinistra <mark style="background: #FFB8EBA6;">(leftmost)</mark> se in ogni passo si sostituisce il simbolo non terminale più a sinistra nella derivazione, altrimenti è detta derivazione destra <mark style="background: #FFB8EBA6;">(rightmost)</mark>. Nel caso della grammatica precedente, l'albero di derivazione sinistro corrisponde ad una derivazione sinistra, mentre l'albero di derivazione destro corrisponde ad una derivazione destra.
+
+Una <mark style="background: #BBFABBA6;">grammatica context-free è ambigua</mark> se esiste almeno una stringa che può essere generata in modo ambiguo. In questo caso, la grammatica può generare più di un albero di derivazione per almeno una stringa. Al contrario, se una grammatica può generare al massimo un albero di derivazione per ogni stringa, allora è detta univoca.
+
+Un <mark style="background: #D2B3FFA6;">linguaggio context-free è detto inerentemente ambiguo</mark> se non esiste nessuna grammatica univoca che lo genera. In altre parole, tutti i possibili grammatiche per il linguaggio sono ambigue. Ad esempio, il linguaggio delle parole palindromiche su un alfabeto di due lettere è inerentemente ambiguo.
+
+Un altro esempio:
+![[linguaggio_ambiguo_esempio.png | 500]]
+
+[_Torna all'indice_](#grammatiche%20libere%20dal%20contesto)
+
+---
+
+## Semplificazioni
+Per restringere la forma delle produzioni permesse alle grammatiche *context-free* senza alterare la classe dei linguaggi riconosciuti, si possono applicare alcune trasformazioni standard:
+
+1. [Forma normale di Chomsky:](#Forma%20normale%20di%20Chomsky) questa trasformazione permette di scrivere ogni produzione in una delle due forme seguenti: $A → BC$ o $A → a$, dove $A$, $B$ e $C$ sono simboli non terminali, e $a$ è un simbolo terminale. In questa forma normale, tutte le produzioni hanno due simboli non terminali o un simbolo terminale a destra, semplificando le operazioni di parsing.
+
+2. [Eliminazione di simboli inutili:](#Eliminazione%20di%20simboli%20inutili) questa trasformazione consiste nell'eliminare tutti i simboli non terminali e terminali che non sono raggiungibili dalla produzione iniziale S. In questo modo, si eliminano simboli che non contribuiscono alla generazione di nessuna stringa del linguaggio.
+
+3. [Eliminazione di ε-produzioni:](#Eliminazione%20di%20ε-produzioni) questa trasformazione consiste nell'eliminare tutte le produzioni della forma $A → ε$, dove $A$ è un simbolo non terminale. Questo può comportare la creazione di nuove produzioni per rappresentare le possibilità di avere o meno simboli non terminali.
+
+[_Torna all'indice_](#grammatiche%20libere%20dal%20contesto)
+
+---
+
+### Eliminazione di simboli inutili
+Per eliminare i simboli inutili, si può utilizzare l'algoritmo seguente:
+1. Trovare tutti i simboli non terminali che possono essere raggiunti dalla produzione iniziale S.
+2. Trovare tutti i simboli non terminali e terminali che sono usati nelle produzioni trovate al primo passo.
+3. Ripetere i passi 1 e 2 finché non ci sono più simboli non terminali o terminali da aggiungere alla lista trovata al passo 2.
+4. Costruire una nuova grammatica utilizzando solo i simboli non terminali e terminali trovati al passo 2. Tutte le produzioni che utilizzano simboli non terminali o terminali che non sono in questa lista possono essere eliminate.
+
+#### Esempio
+#todo 
+- [ ] Da verifica la correttezza
+
+Supponiamo di avere la seguente grammatica context-free:
+```css
+S → A | B
+A → a
+B → b | C
+C → c | D
+E → f
+```
+In questa grammatica, il simbolo iniziale è S. Tuttavia, il simbolo E non è mai utilizzato in nessuna produzione, quindi possiamo eliminarlo dalla grammatica. Inoltre, il simbolo D non è mai raggiunto da nessun simbolo non terminale, quindi anche questo simbolo è inutile e può essere eliminato.
+
+Si può procedere nel seguente modo:
+1. Trovare i simboli raggiungibili dalla S:
+	- S è direttamente raggiungibile dalla S.
+	- A e B sono direttamente raggiungibili dalla S.
+	- C e E non sono raggiungibili dalla S.
+2. Trovare i simboli generabili:
+	- S, A, B, C e D sono generabili.
+	- E non è generabile.
+3. Trovare i simboli utilizzati:
+	- S, A, B, C e D sono utilizzati.
+	- E non è utilizzato.
+4. Costruire la nuova grammatica senza i simboli inutili:
+	- S → A | B
+	- A → a
+	- B → b | C
+	- C → c
+	- D non compare in nessuna produzione, quindi può essere eliminato.
+
+La nuova grammatica risultante è equivalente a quella originale ma con i simboli inutili eliminati.
+
+[_Torna all'indice_](#grammatiche%20libere%20dal%20contesto)
+
+---
+
+### Eliminazione di ε-produzioni
+Per eliminare le ε-produzioni, si può utilizzare l'algoritmo seguente:
+1. Trovare tutti i simboli non terminali che possono generare ε, ovvero quelli che hanno una produzione della forma $A → ε$.
+2. Per ogni simbolo non terminale A trovato, sostituire tutte le occorrenze di A in tutte le produzioni della grammatica con tutte le possibili combinazioni di simboli non terminali che generano ε, tranne A stesso.
+3. Ripetere il passo 2 finché non ci sono più produzioni della forma $A → ε$ nella grammatica.
+
+#### Esempio
+#todo 
+- [ ] Da verifica la correttezza
+
+Supponiamo di avere la seguente grammatica context-free con ε-produzioni:
+```css
+S → AB | ε
+A → a | ε
+B → b | ε
+C → c
+```
+L'obiettivo è eliminare tutte le epsilon-produzioni senza alterare il linguaggio generato dalla grammatica.
+
+Si può procedere nel seguente modo:
+1.  Trovare tutti i simboli che generano ε:
+	-  A e B generano ε.
+2.  Calcolare tutti i possibili insiemi di simboli che generano ε:
+	- Nessun simbolo oltre ad A e B genera ε.
+3.  Costruire tutte le possibili combinazioni di simboli che generano ε:
+	- A e B generano ε, quindi AB genera ε.
+4.  Aggiungere le nuove produzioni:
+	- $S → AB \;|\; A \;|\; B \;|\; ε$ (aggiungiamo $S → A$ e $S → B$ per includere le produzioni senza $A$ e senza $B$)
+	- $A → a$
+	- $B → b$
+	- $C → c$
+
+La nuova grammatica risultante è equivalente a quella originale ma senza ε-produzioni. Nota che la produzione $S → ε$ viene sostituita con $S → A \;|\; B \;|\; ε$, poiché entrambe generano la stringa vuota.
+
+[_Torna all'indice_](#grammatiche%20libere%20dal%20contesto)
+
+---
+
+### Forma normale di Chomsky
+la faremo alla prossima lezione
