@@ -8,7 +8,7 @@
 
 ## Definizione formale
 Una <mark style="background: #FFB86CA6;">grammatica</mark> è un insieme di regole che oermettono di generare un linguaggio. 
-Le grammatiche sono composte da un insieme di simboli chiamati <mark style="background: #ABF7F7A6;">terminali</mark> (o parole del linguaggio) e un insieme di simboli chiamati <mark style="background: #ABF7F7A6;">non terminali</mark> (o categorie sintattiche) che rappresentano classi di parole o frasi.
+Le grammatiche sono composte da un insieme di simboli chiamati <mark style="background: #ABF7F7A6;">terminali</mark> (o parole del linguaggio, es. lettere alfabeto) e un insieme di simboli chiamati <mark style="background: #ABF7F7A6;">non terminali</mark> (o categorie sintattiche, es. nomi, verbi, aggettivi, ...) che rappresentano classi di parole o frasi.
 
 <mark style="background: #BBFABBA6;">Le grammatiche libere dal contesto (CF)</mark>, o grammatiche *context-free* in inglese, sono un tipo di grammatica formale in cui ogni regola di produzione ha la forma $A → α$, dove $A$ è un simbolo non terminale e $α$ è una stringa di simboli terminali e/o non terminali. 
 In altre parole, in una grammatica *context-free*, ogni non terminale può essere sostituito con qualsiasi stringa di simboli terminali e non terminali.
@@ -105,7 +105,7 @@ Un <mark style="background: #ABF7F7A6;">albero di derivazione con radici etichet
 
 [_Torna all'indice_](#grammatiche%20libere%20dal%20contesto)
 
-### Esempio
+### Esempio - Alberi di derivazione
 Consideriamo la seguente grammatica context-free:
 $$S → aSb \;| \;ε$$
 Per generare la stringa "aabbb", possiamo costruire il seguente albero di derivazione:
@@ -161,7 +161,7 @@ Per eliminare i simboli inutili, si può utilizzare l'algoritmo seguente:
 3. Ripetere i passi 1 e 2 finché non ci sono più simboli non terminali o terminali da aggiungere alla lista trovata al passo 2.
 4. Costruire una nuova grammatica utilizzando solo i simboli non terminali e terminali trovati al passo 2. Tutte le produzioni che utilizzano simboli non terminali o terminali che non sono in questa lista possono essere eliminate.
 
-#### Esempio
+#### Esempio - Eliminazione simboli inutili
 #todo 
 - [ ] Da verifica la correttezza
 
@@ -205,7 +205,9 @@ Per eliminare le ε-produzioni, si può utilizzare l'algoritmo seguente:
 2. Per ogni simbolo non terminale A trovato, sostituire tutte le occorrenze di A in tutte le produzioni della grammatica con tutte le possibili combinazioni di simboli non terminali che generano ε, tranne A stesso.
 3. Ripetere il passo 2 finché non ci sono più produzioni della forma $A → ε$ nella grammatica.
 
-#### Esempio
+[_Torna all'indice_](#grammatiche%20libere%20dal%20contesto)
+
+#### Esempio - Eliminazione ε-produzioni
 #todo 
 - [ ] Da verifica la correttezza
 
@@ -237,5 +239,156 @@ La nuova grammatica risultante è equivalente a quella originale ma senza ε-pro
 
 ---
 
-### Forma normale di Chomsky
-la faremo alla prossima lezione
+## Forma normale di Chomsky
+La <mark style="background: #FFB86CA6;">Forma Normale di Chomsky (CNF)</mark> è una forma particolare in cui si possono esprimere le grammatiche libere dal contesto (Context-Free Grammar o CFG). 
+Una grammatica si dice essere in CNF se ogni sua produzione ha una delle seguenti due forme:
+- $A → BC$ (dove $A$, $B$ e $C$ sono simboli non terminali)
+- $A → a$ (dove $a$ è un simbolo terminale)
+
+> In altre parole, ogni produzione deve avere un simbolo non terminale come testa e la sua coda deve essere composta da due simboli non terminali o da un singolo simbolo terminale.
+
+<mark style="background: #BBFABBA6;">Il Teorema di Chomsky stabilisce che ogni linguaggio CF può essere generato da una grammatica in CNF.</mark> La dimostrazione di questo teorema utilizza la forma normale di Greibach, che è una forma particolare delle grammatiche CF, e dimostra che ogni grammatica in forma normale di Greibach può essere convertita in CNF.
+
+<mark style="background: #ABF7F7A6;">L'algoritmo per trasformare una grammatica in CNF è il seguente:</mark>
+1. Eliminare le produzioni che generano simboli terminali.
+2. Eliminare le produzioni che generano epsilon-produzioni.
+3. Eliminare le produzioni che generano simboli non raggiungibili.
+4. Sostituire tutte le produzioni di lunghezza maggiore di 2 con produzioni binarie.
+5. Sostituire ogni simbolo terminale con una produzione unaria.
+
+[_Torna all'indice_](#grammatiche%20libere%20dal%20contesto)
+
+### Esempio - Forma normale di Chomsky
+#todo 
+- [ ] Da verifica la correttezza
+
+Sia data la seguente grammatica:
+```
+S -> aA | B
+A -> ε | aB
+B -> cC | Bd
+C -> d | BCc
+```
+
+In questa grammatica, il simbolo $a$ è un simbolo terminale, mentre $S$, $A$, $B$, e $C$ sono simboli non terminali. Inoltre, ci sono due epsilon-produzioni: $A → ε$ e $C → d$. Infine, il simbolo $d$ è un simbolo terminale, ma non è raggiungibile partendo dal simbolo iniziale $S$.
+
+Per eliminare i simboli inutili, iniziamo eliminando i simboli non raggiungibili. Possiamo fare ciò in tre passaggi:
+1.  Trovare i simboli raggiungibili dal simbolo iniziale $S$: poiché $S$ è direttamente raggiungibile, i simboli raggiungibili sono $S$, $a$, $B$, e $C$.
+2.  Trovare i simboli raggiungibili da ogni simbolo non terminale trovato al passaggio precedente: partendo da $S$, i simboli raggiungibili sono $S$, $a$, $B$, $C$, $ε$, $d$, $Bd$, e $Cc$.
+3.  Costruire una nuova grammatica che contiene solo i simboli raggiungibili dal simbolo iniziale: la nuova grammatica sarà la seguente:
+```
+S -> aA | B
+A -> aB
+B -> Bd
+C -> BCc
+```
+
+A questo punto, possiamo eliminare le epsilon-produzioni. Iniziamo aggiungendo una nuova produzione per ogni epsilon-produzione trovata:
+```
+S -> aA | B
+A -> aB | ε
+B -> Bd
+C -> d | BCc
+```
+
+A questo punto, possiamo eliminare i simboli non generativi. Iniziamo eliminando $A -> ε$, che genera la stringa vuota ma non è raggiungibile dal simbolo iniziale:
+```
+S -> aA | B
+A -> aB
+B -> Bd
+C -> d | BCc
+```
+
+Infine, possiamo riscrivere le produzioni in forma normale di Chomsky. Per farlo, dobbiamo creare nuovi simboli non terminali per ogni simbolo terminale nella grammatica:
+```
+S -> X1A | B
+A -> X2B | a
+B -> Bd
+C -> d | X3Cc
+X1 -> a
+X2 -> ε
+X3 -> ε
+```
+
+In questa forma normale di Chomsky, ogni produzione ha la forma $X -> YZ$, dove $X$, $Y$, e $Z$ sono simboli non terminali.
+
+[_Torna all'indice_](#grammatiche%20libere%20dal%20contesto)
+
+### Esempio del libro
+![[forma_normale_chomsky.png]]
+
+[_Torna all'indice_](#grammatiche%20libere%20dal%20contesto)
+
+---
+
+## Forma normale di Greibach
+La <mark style="background: #FFB86CA6;">Forma Normale di Greibach (GNF)</mark> è una forma normale per le grammatiche formali, simile alla forma normale di Chomsky (CNF). Una grammatica si trova in GNF se tutte le produzioni sono nella forma $A → aB_1B_2 \cdot \cdot \cdot B_n$, dove $A$ è un simbolo non terminale, $a$ è un simbolo terminale e $B_1B_2 \cdot \cdot \cdot B_n$ sono simboli non terminali.
+
+L'idea principale dell'algoritmo per la trasformazione di una grammatica in GNF è quella di utilizzare l'<mark style="background: #BBFABBA6;">unfolding</mark>, ovvero la sostituzione di un simbolo non terminale con la sua definizione nella grammatica. In particolare, l'unfolding viene applicato in modo iterativo fino a quando la grammatica non si trova nella forma desiderata.
+
+<mark style="background: #BBFABBA6;">L'eliminazione della ricorsione sinistra</mark> è un'altra operazione fondamentale per la trasformazione di una grammatica in GNF. Una produzione $A → Aα$ viene considerata ricorsiva sinistra se $A$ compare come primo simbolo nella parte destra della produzione. 
+Per eliminare la ricorsione sinistra, si utilizza una tecnica chiamata fattorizzazione sinistra.
+
+La <mark style="background: #D2B3FFA6;">fattorizzazione sinistra</mark> consiste nell'identificare una produzione non terminale che ha due o più simboli non terminali nella parte destra e quindi riscriverla in modo da suddividerla in due o più produzioni più corte, dove solo il primo simbolo non terminale della produzione originale è presente nella parte destra della produzione.
+
+Ad esempio, consideriamo la seguente produzione:
+```
+A -> BCD
+```
+Possiamo applicare la fattorizzazione sinistra suddividendo la produzione in due produzioni più corte come segue:
+```
+A -> BE 
+E -> CD
+```
+In questo modo, abbiamo ridotto la lunghezza della produzione originale da tre a due simboli non terminali.
+
+> In pratica, l'eliminazione della ricorsione sinistra e l'unfolding vengono applicati in modo alternato fino a quando la grammatica raggiunge la forma normale di Greibach.
+
+L'importanza della forma normale di Greibach sta nel fatto che essa semplifica notevolmente l'analisi e la comprensione della grammatica. In particolare, permette di effettuare l'analisi sintattica in modo più efficiente e preciso.
+
+[_Torna all'indice_](#grammatiche%20libere%20dal%20contesto)
+
+### Esempio - Forma normale di Greibach
+#todo 
+- [ ] Da verifica la correttezza
+
+Un esempio di applicazione dell'algoritmo per la trasformazione di una grammatica in GNF:
+```
+S → aA | bB 
+A → aS | bAA 
+B → bS | aBB
+```
+
+1. Eliminazione della ricorsione sinistra in $A$: 
+```
+A → aS | bAA 
+A → baSA' | ε 
+A' → aSA' | bAA'
+```
+
+2.  Unfolding della produzione $S → aA$: 
+```
+S → aA | bB 
+S → a(baSA' | ε) | bB 
+S → abaSA' | bB
+```
+
+3.  Unfolding della produzione $B → aBB$: 
+```
+S → abaSA' | b(aBB | bS) 
+S → abaSA' | baBB | bbS
+```
+
+4.  Trasformazione delle produzioni in GNF: 
+```
+S → aA1 | bB1 
+A → aS1 | bA2 
+A1 → bA' | ε 
+A' → aS1A' | bA2A' 
+B → bS2 | aB3 
+S1 → bS1A' | ε 
+S2 → aB3 | bS2S2 
+B3 → bS2B3 | ε
+```    
+
+La grammatica risultante è ora in GNF.
