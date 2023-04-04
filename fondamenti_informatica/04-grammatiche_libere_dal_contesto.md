@@ -348,6 +348,21 @@ L'importanza della forma normale di Greibach sta nel fatto che essa semplifica n
 
 [_Torna all'indice_](#grammatiche%20libere%20dal%20contesto)
 
+---
+
+### Grammatiche lineari destre
+Le <mark style="background: #FFB86CA6;">grammatiche lineari destre</mark>, anche chiamate grammatiche a produzioni lineari destre o grammatiche regolari destre, sono una classe di grammatiche formali. Queste grammatiche hanno la particolarità di avere ogni produzione nella forma:
+$$A → aB \;\;\text{o}\;\; A → a$$
+dove $A$ e $B$ sono simboli non terminali, a è un simbolo terminale e la parte destra della produzione è composta al massimo da un simbolo non terminale seguito da zero o più simboli terminali.
+
+In altre parole, ogni produzione delle grammatiche lineari destre ha un unico simbolo non terminale alla fine della parte destra. Questo significa che ogni derivazione di una stringa a partire da una grammatica lineare destra procede da sinistra verso destra.
+
+Le grammatiche lineari destre sono una sottoclasse delle grammatiche context-free (CF) e, come tali, possono essere utilizzate per descrivere linguaggi formali. In particolare, <mark style="background: #BBFABBA6;">ogni linguaggio regolare</mark> (cioè un linguaggio riconosciuto da un automa finito deterministico) <mark style="background: #BBFABBA6;">può essere generato da una grammatica lineare destra.</mark>
+
+[_Torna all'indice_](#grammatiche%20libere%20dal%20contesto)
+
+---
+
 ### Esempio - Forma normale di Greibach
 #todo 
 - [ ] Da verifica la correttezza
@@ -392,3 +407,5 @@ B3 → bS2B3 | ε
 ```    
 
 La grammatica risultante è ora in GNF.
+
+[_Torna all'indice_](#grammatiche%20libere%20dal%20contesto)
