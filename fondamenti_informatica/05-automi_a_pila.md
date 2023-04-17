@@ -72,9 +72,9 @@ Quindi, se un APND $M$ accetta un certo linguaggio $L$, allora possiamo costruir
 ---
 
 ### Esempi
-![[esempio1.png]]
+![[FdI/fondamenti_informatica/data/images/proprieta_linguaggi_CF/esempio1.png]]
 
-![[esempio2.png]]
+![[FdI/fondamenti_informatica/data/images/proprieta_linguaggi_CF/esempio2.png]]
 
 [_Torna all'indice_](#automi%20a%20pila)
 
