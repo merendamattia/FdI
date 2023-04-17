@@ -102,6 +102,7 @@ La rappresentazione mediante tabella degli NFA è profondamente diversa (per ogn
 
 #### Un esempio
 ![[NFA_esempio2.jpeg]]
+![[NFA_esempio.png]]
 
 [_Torna all'indice_](#automi%20a%20stati%20finiti)
 
