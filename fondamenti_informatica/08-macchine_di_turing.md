@@ -149,3 +149,51 @@ La dimostrazione è ovvia, poichè per definizione non esistono due quintuple $q
 [_Torna all'indice_](#macchine%20di%20turing)
 
 ---
+
+## Funzioni calcolabili
+Una funzione $f : \mathbb{N}^n \to \mathbb{N}$ è <mark style="background: #FFB86CA6;">Turing–calcolabile</mark> se esiste una *MdT* tale che, partendo dalla configurazione iniziale
+![[definizione_11_10_1.png]]
+termina nella configurazione
+![[definizione_11_10_2.png]]
+se $f(x_1,...,x_n)$ è definita, non termina altrimenti.
+Dove per ogni $(x_1,...,x_n) ∈ \mathbb{N}^n$, $\underline{x_1} , . . . , \underline{x_n}$ , $\underline{f(x_1, . . . , x_n)}$ sono le rappresentazioni in unario rispettivamente di $x_1,...,x_n$ , $f(x1,...,xn)$ (mentre $q_f ∈ Q$ è tale per cui $δ(q_F,\$)$ è indefinito).
+
+> Si osservi che non poniamo restrizioni sul contenuto del nastro a sinistra della testina e a destra di $f(x1, . . . , xn)$ nella configurazione finale. Invece assumiamo che a sinistra e a destra dell’input nella configurazione iniziale ci siano solo $\$$.
+
+[_Torna all'indice_](#macchine%20di%20turing)
+
+---
+
+### In altre parole
+Una funzione si dice <i><u>Turing-calcolabile</i></u> se esiste una *MdT* in grado di calcolare tale funzione. Questo significa che la funzione può essere espressa come una procedura algoritmica, in cui per ogni input la *MdT* produce l'output corrispondente.
+
+La *MdT* che calcola una funzione può essere vista come un'implementazione dell'algoritmo che rappresenta la funzione stessa. L'input viene fornito alla *MdT* tramite il nastro e l'output viene prodotto anch'esso sul nastro. La computazione viene eseguita in modo deterministico, in quanto l'algoritmo e la *MdT* che lo implementa sono privi di aleatorietà.
+
+In sostanza, una funzione è *Turing-calcolabile* se esiste un procedimento meccanico (cioè una macchina di Turing) in grado di calcolarla per qualsiasi input, senza bisogno di alcun tipo di intuizione o creatività da parte dell'operatore.
+
+> Si osservi che, se esiste una *MdT* computante la funzione $f$, allora ne esistono infinite calcolanti la stessa funzione (si aggiungano arbitrariamente stati o simboli *"inutili"*).
+
+[_Torna all'indice_](#macchine%20di%20turing)
+
+---
+
+### Esempio
+![[esempio_funzioni_calcolabili.png]]
+
+[_Torna all'indice_](#macchine%20di%20turing)
+
+---
+
+## MdT generalizzate
+Il modello di *MdT* che abbiamo visto è solo uno dei possibili modelli matematici per definire l’effettiva calcolabilità di funzioni. È infatti possibile definire una vasta gamma di *MdT* differenti ma equivalenti rispetto alla classe di funzioni Turing-calcolabili che esse possono indurre.
+
+Questo perchè qualunque *MdT* ottenuta anche con modifiche strutturali (per esempio aumentando il numero dei nastri o delle testine) se soddisfa le 10 condizioni che abbiamo definito per caratterizzare la [nozione intuitiva di algoritmo](obsidian://open?vault=Uni&file=FdI%2Ffondamenti_informatica%2F07-notazione_di_algoritmo), può essere simulata da una *MdT* definita come nella [Definizione 11.1 (Macchina di Turing)](#Definizione%2011.1%20(Macchina%20di%20Turing)).
+
+> La potenza del formalismo delle *MdT* non viene dunque ridotta/aumentata modificando l’insieme dei simboli/stati o modificando la struttura stessa della macchina (numero di nastri e/o testine).
+
+- Una *MdT* con $n$ nastri ed $m$ testine ($m ≥ n$) può essere simulata da una *MdT* con $1$ nastro ed $1$ testina.
+- Una *MdT* con $n$ simboli ed $m$ stati può essere simulata da una *MdT* con $2$ stati, aumentando opportunamente il numero dei suoi simboli.
+- Una *MdT* con $n$ simboli ed $m$ stati può essere simulata da una *MdT* con $2$ simboli, aumentando opportunamente il numero dei suoi stati.
+- Ogni *MdT* può essere simulata da una *MdT* che può solo scrivere e non rimpiazzare simboli sul nastro.
+
+[_Torna all'indice_](#macchine%20di%20turing)
