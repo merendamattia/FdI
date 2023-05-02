@@ -144,7 +144,7 @@ La dimostrazione è ovvia, poichè per definizione non esistono due quintuple $q
 ---
 
 ### Esempi
-![[esempi.png]]
+![[FdI/fondamenti_informatica/data/images/macchine_di_turing/esempi.png]]
 
 [_Torna all'indice_](#macchine%20di%20turing)
 
