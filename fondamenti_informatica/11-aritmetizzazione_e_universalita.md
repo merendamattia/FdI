@@ -8,6 +8,8 @@ Aritmetizzazione significa semplicemente traduzione nel linguaggio dell’aritme
 Il primo utilizzo dell’aritmetizzazione è dovuto a G ̈odel nel 1931 nella dimostrazione del risultato fondamentale di incompletezza dell’aritmetica; da qui anche il termine equivalente di Godelizzazione. Nel seguito considereremo le MdT come esempio ed applicheremo alle MdT il concetto di aritmetizzazione. 
 Per la Tesi di Church-Turing, sappiamo che questa non è una restrizione, ed analoghe aritmetizzazioni possono essere definite per ogni sistema formale equivalente alle MdT.
 
+---
+
 ## Enumerazione delle MdT
 Sia $Σ = \{\$, 0\}$. Quante sono le macchine di Turing ‘distinte’ descrivibili? Si supponga $Q = \{q_0\}$. 
 Si tratterà di riempire la tabella
@@ -81,3 +83,22 @@ $$
 ---
 
 ## Macchina di Turing Universale
+È possibile costruire una MdT che, data la coppia di naturali $(x_1,x_2)$, simula il calcolo di $P_{x_1}$ sull’input $x_2$. Per fare questo: 
+- calcola la funzione (tabella) di transizione della macchina $P_{x_1}$  
+- prepara una porzione di nastro che codifica $x_2$
+- memorizza lo stato iniziale $q_0$
+- si posiziona in corrispondenza della prima cella della codifica di $x_2$ 
+- ...
+
+[_Torna all'indice_](#Aritmetizzazione%20e%20universalità)
+
+---
+
+### Teorema 14.5
+Esiste un indice $z$ tale che per ogni $x$ e $y$,
+![[teorema14-5.png]]
+![[dimostrazione_teorema14-5.png]]
+
+La funzione $φ_z$ ottenuta nella dimostrazione del precedente teorema è detta <mark style="background: #FFB86CA6;">funzione parziale universale</mark> e corrisponde alla MdT universale vista in precedenza. Chiaramente, il precedente teorema può essere generalizzato a funzioni di $k ≥ 1$ variabili, in modo tale che, per ogni funzione di $k ≥ 1$ variabili, esiste una funzione di $k + 1$ variabili che gioca il ruolo di funzione universale parziale.
+
+[_Torna all'indice_](#Aritmetizzazione%20e%20universalità)
