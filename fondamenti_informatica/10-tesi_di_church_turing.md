@@ -5,11 +5,11 @@ $$
 
 > Si tratta chiaramente di una tesi indimostrabile, vista l’impossibilità di maneggiare formalmente (= matematicamente) la nozione di “intuitivamente calcolabile”.
 
-Accettando la Tesi di Church-Turing si osserva immediatamente la notevole importanza che assumono le funzioni calcolabili da MdT, o equivalentemente, le funzioni parziali ricorsive o λ-definibili. Queste classi di funzioni vengono a rappresentare la classe delle funzioni calcolabili effettivamente mediante un algoritmo. 
+Accettando la Tesi di Church-Turing si osserva immediatamente la notevole importanza che assumono le funzioni calcolabili da MdT, o equivalentemente, le funzioni parziali ricorsive o λ-definibili. <mark style="background: #ABF7F7A6;">Queste classi di funzioni vengono a rappresentare la classe delle funzioni calcolabili effettivamente mediante un algoritmo. </mark>
 
-Questa Tesi permette di limitare l’estensione di ciò che è effettivamente calcolabile: se dimostriamo che una funzione non è parziale ricorsiva, allora, in virtù della Tesi di Church-Turing, essa non è calcolabile in nessun modo effettivo. Analogamente, dare un algoritmo per una funzione corrisponde a dimostrare, per la Tesi di Church-Turing, che essa è una funzione parziale ricorsiva.
+<mark style="background: #BBFABBA6;">Questa Tesi permette di limitare l’estensione di ciò che è effettivamente calcolabile</mark>: se dimostriamo che una funzione non è parziale ricorsiva, allora, in virtù della Tesi di Church-Turing, essa non è calcolabile in nessun modo effettivo. Analogamente, dare un algoritmo per una funzione corrisponde a dimostrare, per la Tesi di Church-Turing, che essa è una funzione parziale ricorsiva.
 
-> Questo utilizzo della Tesi di Church-Turing è <u>fondamentale</u>. Infatti, sarà sufficiente dimostrare la realizzabilità di un algoritmo per affermare l’esistenza di una MdT o di una funzione parziale ricorsiva corrispondente, senza dover es- ibire una tale macchina o una funzione per calcolarlo.
+> Questo utilizzo della Tesi di Church-Turing è <u>fondamentale</u>. Infatti, sarà sufficiente dimostrare la realizzabilità di un algoritmo per affermare l’esistenza di una MdT o di una funzione parziale ricorsiva corrispondente, senza dover esibire una tale macchina o una funzione per calcolarlo.
 
 Questa caratteristica della Tesi di Church-Turing darà un aspetto apparentemente informale alle dimostrazioni di effettiva calcolabilità di funzioni.
 
