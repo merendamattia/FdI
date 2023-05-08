@@ -49,3 +49,6 @@ $$
 \text{Un insieme } A \text{ è ricorsivo se solo se }A \; e \; \overline{A} \text{ sono r.e.}
 $$
 ![[dimostrazione_teorema17-5.png]]
+
+#todo 
+- [ ] da finire
