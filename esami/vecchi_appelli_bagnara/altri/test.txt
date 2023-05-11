@@ -1,0 +1,12 @@
+L(M) = 1*(1+0)*0*
+
+L(M) = e+(0+1)*001(0+1)*11(0+1)* se no insieme vuoto
+
+L(M) = 0*(01+0)*
+
+L(M) = (e+a+aa+aaa)(e+b+bb+bbb)
+
+L(M) = aaaaa*bbbb*
+
+L(M) = ((aa)*b(aa)*)+(aba)
+ 

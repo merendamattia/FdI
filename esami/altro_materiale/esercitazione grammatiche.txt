@@ -1,0 +1,357 @@
+Portare in forma normale di Chomsky la seguente grammatica non contestuale:
+S -> AB | CAB | ACE
+A -> B | BA | SAAB
+B -> b | CAb | CED
+C -> aC | CaD | BaD
+D -> Ca | BEC
+E -> e | Be
+
+Risoluzione:
+1) Eliminazione delle epsilon-produzioni
+   in questo caso non ce ne sono
+
+2) Eliminazione delle produzioni unitarie
+   elenco delle dipendenze:
+   A -----> B
+
+   S -> AB | CAB | ACE
+   A -> b | CAb | CED | BA | SAAB
+   B -> b | CAb | CED
+   C -> aC | CaD | BaD
+   D -> Ca | BEC
+   E -> e | Be
+
+3) Eliminazione dei simboli inutili
+   insieme di simboli che portano a stringhe di costanti in un passo:
+   { A, B, E }
+   insieme di simboli raggiunti da S:
+   { A, B, C, E, b, e}
+
+   - D non è derivabile a partire da S, e non produce
+     stringhe di terminali, quindi è inutile e va eliminato.
+     S -> AB | CAB | ACE
+     A -> b | CAb | BA | SAAB
+     B -> b | CAb 
+     C -> aC 
+     E -> e | Be
+
+     - C non produce stringhe di terminali, quindi è inutile
+       e va eliminato.
+       S -> AB
+       A -> b | BA | SAAB
+       B -> b 
+       E -> e | Be
+	    
+    - E non è più raggiungibile da S, quindi va eliminato.
+      S -> AB 
+      A -> b | BA | SAAB
+      B -> b
+
+4) forma di Chomsky
+   pongo X -> SA
+
+   S -> AB
+   A -> b | BA | XS
+   B -> b
+   X -> SA
+   
+---------------------------------------------------
+
+Portare la seguente grammatica in forma normale di Chomsky:
+S -> aEb | aaC | AA
+A -> BC | bS | b
+B -> aB | epsilon
+C -> Ca | Cb
+D -> a | c
+
+Risoluzione:
+1) Eliminazione delle epsilon-produzioni
+   variabili annullabili: { B }
+   
+   S -> aEb | aaC | AA
+   A -> BC | C | bS | b
+   B -> aB | a
+   C -> Ca | Cb
+   D -> a | c
+
+2) Eliminazione delle produzioni unitarie
+   elenco delle dipendenze:
+   A -----> C
+
+   S -> aEb | aaC | AA
+   A -> BC | Ca | Cb | bS | b
+   B -> aB | a
+   C -> Ca | Cb
+   D -> a | c
+
+3) Eliminazione dei simboli inutili
+   insieme dei simboli terminali raggiunti da S: { a, b }
+   insieme dei simboli raggiunti da S: { a, b, E, C, A, B, S }
+
+   C non produce stringhe di soli terminali
+   S -> aEb | AA
+   A -> BC | bS | b
+   B -> aB | a
+   D -> a | c
+
+   E non è definito dalla grammatica
+   S -> AA
+   A -> bS | b
+   B -> aB | a
+   D -> a | c
+
+   D non viene raggiunto da S
+   S -> AA
+   A -> bS | b
+   B -> aB | a
+
+   B non viene raggiunto da S
+   S -> AA
+   A bS | b
+
+4) forma normale di Chomsky
+   pongo X -> b
+   S -> AA
+   A -> BS | b
+   X -> b
+--------------------------------------------------
+Portare la seguente grammatica in forma normale di Chomsky
+S -> aAa | aa
+A -> aAa | B
+B -> bBb | bb
+
+Risoluzione:
+1) Eliminazione delle epsilon-produzioni
+   non ce ne sono
+
+2) Eliminazione delle produzioni unitarie
+   elenco dipendenze:
+   A -----> B
+   A -----> S
+
+   S -> aAa | aa
+   A -> aAa | aa | bBb | bb         (A -> S | bBb | bb)
+   B -> bBb | bb
+
+3) Eliminazione dei simboli inutili
+   - B non appare nelle derivazioni di S, va eliminato
+    S -> aAa | aa
+    A -> aAa | aa
+
+4) forma normale di Chomsky
+   pongo C -> a, D -> Aa
+   S -> CD | CC
+   A -> CD | CC
+   
+-------------------------------------------------
+Portare la seguente grammatica in forma normale di Chomsky:
+S -> XY | W
+X -> aXb | epsilon
+Y -> cY | epsilon
+W -> aWc | Z
+Z -> bZ | epsilon
+
+Risoluzione:
+1) Eliminazione delle epsilon-produzioni
+   insieme delle var. annullabili: { X, Y, Z }
+   S -> XY | Y | W
+   X -> aXb | ab
+   Y -> cY | c
+   W -> aWc | Z
+   Z -> bZ | b
+
+2) Eliminazione delle produzioni unitarie
+   S -> XY | cY | c | aWc | bZ | b
+   X -> aXb | ab
+   Y -> cY | c
+   W -> aWc | bZ | b
+   Z -> bZ | b
+
+3) Eliminazione dei simboli inutili
+   insieme dei simboli raggiungibili da S: { X, Y, c, a, W, b, Z }
+   sono tutti utili
+
+4) forma normale di Chomsky
+   pongo K -> aW, J -> aX, A -> a
+   S -> XY | YY | c | KY | ZW | b
+   X -> JW | AZ
+   Y -> WY | c
+   W -> KY | ZZ | b
+   Z -> WZ | b
+   K -> aW
+   J -> aX
+   A -> a
+
+---------------------------------------------------------------
+
+Portare la seguente grammatica in forma normale di Chomsky:
+S -> BSB | B | epsilon
+B -> 00 | epsilon
+
+Risoluzione:
+1) Eliminazione delle epsilon-produzioni
+   insieme delle var. annullabili: { S, B }
+   S -> BSB | BB | BS | SB | S | B
+   B -> 00
+
+2) Eliminazione delle produzioni unitarie
+   S -> BSB | BB | BS | SB | 00
+   B -> 00
+
+3) Eliminazione dei simboli inutili
+   non ci sono simboli inutili
+
+4) forma normale di Chomsky
+   pongo A -> 0, C -> BS
+   S -> CB | BB | BS | SB | AA
+   B -> AA
+   A -> 0
+   C -> BS
+   
+------------------------------------------------------
+
+portare la seguente grammatica in forma normale di Greibach:
+S -> S S | A Z | A X
+X -> S Z
+A -> 0
+Z -> 1
+
+Risoluzione:
+Dal momento che non è stato stabilito dall'esercizio, la prima
+cosa da fare è stabilire un ordinamento stretto tra i simboli
+non terminali. Per fare questo, è conveniente analizzare le
+dipendenze:
+S dipende da A, X dipende da S. Scegliamo dunque l'ordinamento:
+X < S < A < Z.
+
+1) Ricerca di violazioni di ordinamento
+   in questo caso non ce ne sono, dunque non occorre fare unfolding
+
+2) Eliminazione ricorsione a sinistra
+   vediamo che S presenta una ricorsione a sinistra:
+   S -> S S | A Z | A X
+          -   ---   ---
+      alpha1  beta1 beta2
+
+   ora seguamo lo schema del lemma 6:
+   A -> beta1 | ... | beta_m | beta1 B | ... | beta_n B
+   B -> alpha1 | ... | alpha_m | alpha1 B | ... | alpha_m B
+   e quindi ho:
+   
+   S -> A Z | A X | A Z B | A X B
+   B -> S | S B
+
+   X -> S Z diventa
+   X -> A Z Z | A X Z | A Z B Z | A X B Z
+
+   B -> S | S B diventa
+   B -> A Z | A X | A Z B | A X B | A Z B B | A X B B   
+
+   adesso sostituisco A:
+   S -> 0 Z | 0 X | 0 Z B | 0 X B
+   X -> 0 Z Z | 0 X Z | 0 Z B Z | 0 X B Z
+   B -> 0 Z | 0 X | 0 Z B | 0 X B | 0 Z B B | 0 X B B
+   Z -> 1
+   A viene eliminato perché diventa inutile.
+
+----------------------------------------------------------------------
+
+6.21 Dovier: portare la seguente grammatica in forma normale di Greibach
+A1 -> A3 A3 | a
+A2 -> A1 A2 | b
+A3 -> A3 A1 | c
+
+1)  Eliminazione violazioni dell'ordinamento
+    A2 viola l'ordinamento, facciamo unfolding su A1
+    A2 -> A3 A3 A2 | a A2 | b
+
+    A1 -> A3 A3 | a
+    A2 -> A3 A3 A2 | a A2 | b
+    A3 -> A3 A1 | c
+
+2)  Eliminazione ricorsione a sinistra
+    A3 presenta una ricorsione a sinistra, uso il lemma 6
+    A3 -> A3 A1 | c
+             --   -
+           alpha1 beta1     
+    A3 -> c | c B
+    B -> A1 | A1 B
+
+    A2 -> A3 A3 A2 | a A2 | b
+    A2 -> c A3 A2 | c B A3 A2 | c A2 | c B A2 | a A2 | b
+    
+    A1 -> A3 A3 | a
+    A1 ->  c A3 | c B A3 | c | c B | a
+
+    B -> A1 | A1 B
+    B -> c A3 | c B A3 | c | c B | a | c A3 B | c B A3 B | c B | c B B | a B
+
+    La grammatica risultante è:
+    A1 ->  c A3 | c B A3 | c | c B | a
+    A2 -> c A3 A2 | c B A3 A2 | c A2 | c B A2 | a A2 | b
+    A3 -> c | c B
+    B -> c A3 | c B A3 | c | c B | a | c A3 B | c B A3 B | c B | c B B | a B
+    
+    
+-------------------------------------------------
+
+6.22 Dovier: Si riconduca alle forme normali di 
+Chomsky e di Greibach la grammatica:  
+
+S -> epsilon | a S b
+
+* Forma normale di Chomsky
+   
+1) Eliminazione delle epsilon-produzioni
+   S -> a S b | a b
+   
+2) Eliminazione produzioni unitarie
+   non ce ne sono
+   
+3) Eliminazione simboli inutili
+   non ce ne sono
+   
+4) forma normale di Chomksy
+   pongo A1 -> a, A2 -> b,
+   
+   S -> A1 S A2 | A1 A2
+   
+   pongo A3 -> A1 S
+   
+   
+   S -> A3 A2 | A1 A2
+   A1 -> a
+   A2 -> b
+   A3 -> A1 S
+   
+   
+   
+* Forma normale di Greibach
+
+S -> A3 A2 | A1 A2
+A1 -> a
+A2 -> b
+A3 -> A1 S
+
+1)  Eliminazione violazioni dell'ordinamento (S < A1 < A2 < A3)
+    A3 viola l'ordinamento, unfolding su A1
+    
+    A3 -> a S
+    
+2)  Eliminazione ricorsioni a sinistra
+	non ce ne sono
+	
+3)  forma normale di Greibach
+	
+	S -> a S A2 | a A2
+	A1 -> a
+	A2 -> b
+	A3 -> a S
+	
+    
+    
+    
+    
+    
+    
+    
