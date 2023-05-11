@@ -3,6 +3,7 @@ Corso _"Fondamenti di Informatica"_ presso l'Università degli Studi di Parma (9
 ```
 Guida directory:
 .
+├── esami: materiale vecchi appelli
 ├── fondamenti_informatica
 └── linguaggi_di_programmazione
 ```
