@@ -147,3 +147,45 @@ Esempio:
 > ![[esercizio_stile_esame.png]]
 
 [_Torna all'indice_](#Calcolabilità%20e%20linguaggi%20di%20programmazione)
+
+---
+
+## Espressività di While e Turing completezza
+È possibile rappresentare i numeri naturali in $\mathbb{D}_A$. La rappresentazione in $\mathbb{D}_A$ del numero $n$ è denotata $\underline{n}$ ed è definibile come
+
+![[espressivita.png]]
+
+[_Torna all'indice_](#Calcolabilità%20e%20linguaggi%20di%20programmazione)
+
+---
+
+### Funzione While-calcolabile
+![[funzione_while_calcolabile.png]]
+
+[_Torna all'indice_](#Calcolabilità%20e%20linguaggi%20di%20programmazione)
+
+---
+
+### Teorema 16.11
+$$
+f \;:\; \mathbb{N} → \mathbb{N} \; \text{è While-calcolabile sse è Turing-calcolabile.}
+$$
+
+> Dimostrazione di 4 pagine sul libro (pag. 147).
+
+È possibile generalizzare quanto visto per il linguaggio While ad un arbitrario linguaggio di programmazione. Sia $\mathcal{L}$ un linguaggio di programmazione che definisce funzioni su un insieme di dati $\mathbb{D}$.
+
+Supponiamo che esista una codifica univoca dei numeri naturali in $\mathbb{D}$, ovvero per ogni $n: \underline{n} ∈ \mathbb{D}$ e per ogni $n \ne m: \underline{n} \ne \underline{m}$. Sia $\parallel \cdot \parallel^\mathcal{L}$ la semantica del linguaggio $\mathcal{L}$ definita in modo formale:
+
+![[teorema_16-11.png]]
+
+[_Torna all'indice_](#Calcolabilità%20e%20linguaggi%20di%20programmazione)
+
+---
+
+### Linguaggio Turing-completo
+Un linguaggio di programmazione $\mathcal{L}$ è detto *Turing-completo* se l’insieme delle funzioni $\mathcal{L}$*-calcolabili* coincide con la classe delle funzioni *Turing-calcolabili*.
+
+Il linguaggio While è dunque Turing-completo per il [Teorema 16.11](#teorema%2016.11). In particolare, ogni linguaggio di programmazione sufficientemente espressivo per codificare i numeri naturali e comprendente i comandi di base di *assegnamento*, *composizione* ed *iterazione condizionata* tipo While è Turing-completo. Infatti, per dimostrare la Turing-completezza di un linguaggio è sufficiente dimostrare che questo è in grado di *simulare* i costrutti di base di While.
+
+[_Torna all'indice_](#Calcolabilità%20e%20linguaggi%20di%20programmazione)
