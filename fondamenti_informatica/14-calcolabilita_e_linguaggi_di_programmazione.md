@@ -218,3 +218,43 @@ $$
 > Dimostrazione di 3 pagine sul libro (pag. 152).
 
 [_Torna all'indice_](#Calcolabilità%20e%20linguaggi%20di%20programmazione)
+
+---
+
+## Interpreti e metaprogrammazione
+> Per metaprogrammazione si intende la costruzione di programmi che manipolano programmi. 
+
+Questa possibilità, sancita dalla universalità dei sistemi di calcolo Turing-completi, risiede nel fatto che i programmi possono essere codificati in modo univoco nei dati manipolati dai programmi stessi. 
+La MdT universale $\mathbb{U}$ è il prototipo di metaprogramma: essa prende in input l’indice $x$ di una data MdT $M$ ed un dato $y$, e restituisce in output il risultato ottenibile attivando la macchina $M_x$ sul dato $y$:
+
+![[metaprogramma.png]]
+
+Traslando questo ragionamento sui linguaggi di programmazione, si ottiene il concetto di interprete. Siano $\mathcal{L}$ ed $\mathcal{S}$ due linguaggi di programmazione Turing-completi; assumiamo che operino sul medesimo insieme di dati $\mathbb{D}$.
+
+### Definizione 16.15 (Interprete)
+Un <mark style="background: #ABF7F7A6;">interprete</mark> in $\mathcal{L}$ di $\mathcal{S}$-programmi (o semplicemente di $\mathcal{S}$) è un programma $int ∈ \mathcal{L}$ tale che, per ogni $\mathcal{S}$-programma $P$, per ogni dato $d ∈ \mathbb{D}$, e per un'opportuna codifica degli $\mathcal{S}$-programmi in $\mathbb{D}$: 
+
+![[interprete.png]]
+
+> L’esistenza di un interprete è <u>assicurata</u> dalla Turing-completezza dei linguaggi in oggetto.
+
+Un interprete in $\mathcal{L}$ per $\mathcal{L}$-programmi è detto <mark style="background: #BBFABBA6;">metainterprete</mark> del linguaggio $\mathcal{L}$.
+
+[_Torna all'indice_](#Calcolabilità%20e%20linguaggi%20di%20programmazione)
+
+---
+
+### Teorema 16.16
+$$
+\text{Esiste un interprete in WHILE per WHILE.}
+$$
+
+La possibilità offerta da un linguaggio Turing-completo della metaprogrammazione è alla base della esistenza di problemi algoritmicamente non risolvibili. 
+<u>I limiti di ciò che è calcolabile nascono quindi dalle potenzialità del sistema di calcolo stesso.</u>
+$\to$ Si può dimostrare l’indecidibilità della terminazione utilizzando il linguaggio WHILE.
+
+![[dim_teorema_16-16.png]]
+
+$\to$ Entrambi i casi portano ad un assurdo.
+
+[_Torna all'indice_](#Calcolabilità%20e%20linguaggi%20di%20programmazione)
