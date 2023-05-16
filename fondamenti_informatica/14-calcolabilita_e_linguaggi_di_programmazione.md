@@ -189,3 +189,32 @@ Un linguaggio di programmazione $\mathcal{L}$ è detto *Turing-completo* se l’
 Il linguaggio While è dunque Turing-completo per il [Teorema 16.11](#teorema%2016.11). In particolare, ogni linguaggio di programmazione sufficientemente espressivo per codificare i numeri naturali e comprendente i comandi di base di *assegnamento*, *composizione* ed *iterazione condizionata* tipo While è Turing-completo. Infatti, per dimostrare la Turing-completezza di un linguaggio è sufficiente dimostrare che questo è in grado di *simulare* i costrutti di base di While.
 
 [_Torna all'indice_](#Calcolabilità%20e%20linguaggi%20di%20programmazione)
+
+---
+
+## For-calcolabilità e funzioni primitive ricorsive
+In questa sezione presenteremo una variante al linguaggio While. 
+Sostituiremo al comando While due comandi, uno di selezione ed uno iterativo molto usati in programmazione: l’*if-then-else* ed il ciclo *for*. Mostreremo ora come un linguaggio che disponga di questi due costrutti più l’assegnamento permette una espressività pari a quella del formalismo delle funzioni primitive ricorsive.
+
+Nelle stesse ipotesi generali dei programmi While, definiamo un programma *FOR* mediante una grammatica CF nel modo seguente dove $x, y ∈ Var, \text{ e } d ∈ \mathbb{D}_A$ (in particolare, $d$ può essere $nil$):
+
+![[for_calcolabilita.png]]
+
+La semantica intuitiva dei due costrutti è definita nell’esercizio 16.4. Inoltre, come mostrato nell’esercizio 16.6, il costrutto if-then-else è simulabile dal for e dunque superfluo (non ne parleremo nelle dimostrazioni). Una funzione $f \;:\; \mathbb{N}^k → \mathbb{N}$ è For-calcolabile se esiste un programma FOR P tale che per ogni $x_1, \cdots , x_k ∈ \mathbb{N}$:
+
+![[for_calcolabilita2.png]]
+
+> Nel teorema seguente si forniranno delle definizioni più tecniche e precise, ma la sua comprensione e definizione ne può fare a meno.
+
+[_Torna all'indice_](#Calcolabilità%20e%20linguaggi%20di%20programmazione)
+
+---
+
+### Teorema 16.14
+$$
+f \;:\; \mathbb{N}^m → \mathbb{N} \; \text{è FOR-calcolabile se e solo se } f \text{ è primitiva ricorsiva.}
+$$
+
+> Dimostrazione di 3 pagine sul libro (pag. 152).
+
+[_Torna all'indice_](#Calcolabilità%20e%20linguaggi%20di%20programmazione)
