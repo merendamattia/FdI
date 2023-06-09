@@ -6,7 +6,7 @@
 ## Sintassi e semantica
 La sintassi e la semantica sono concetti fondamentali dell'informatica teorica e sono strettamente correlati.
 
-La <mark style="background: #FFB86CA6;">sintassi</mark> si riferisce alla struttura formale di un linguaggio, ovvero alle regole che definiscono la grammatica del linguaggio. Ad esempio, nella teoria delle espressioni regolari, la sintassi definisce le regole per la costruzione di espressioni regolari, come l'uso di parentesi, caratteri speciali come l'asterisco `*` e il punto `.` e gli operatori di unione `+` e concatenazione '$\cdot$' .
+La <mark style="background: #FFB86CA6;">sintassi</mark> si riferisce alla struttura formale di un linguaggio, ovvero alle regole che definiscono la grammatica del linguaggio. Ad esempio, nella teoria delle espressioni regolari, la sintassi definisce le regole per la costruzione di espressioni regolari, come l'uso di parentesi, caratteri speciali come l'asterisco `*` e il punto `.`, e gli operatori di unione `+` e concatenazione '$\cdot$' .
 
 La <mark style="background: #FFB86CA6;">semantica</mark>, d'altra parte, si riferisce al significato del linguaggio, ovvero a ciò che il linguaggio esprime e come viene interpretato. Nella teoria delle espressioni regolari, la semantica definisce il significato delle espressioni regolari, ovvero l'insieme di stringhe che soddisfano l'espressione regolare.
 
@@ -39,16 +39,16 @@ $$L ⊆ Σ^*.$$
 > Un *linguaggio formale* è un insieme di stringhe di caratteri che rispettano determinate regole sintattiche.
 
 Notare che:
-- Σ∗ è esso stesso un linguaggio, il linguaggio formato da tutte le stringhe su Σ;
-- essendo ∅ sottoinsieme di qualsiasi altro insieme, ∅ ⊆ Σ∗ dunque ∅ è un linguaggio su qualsiasi alfabeto;
-- essendo ε la stringa nulla su qualsiasi alfabeto Σ, { ε } ⊆ Σ∗ dunque { ε } è un linguaggio su qualsiasi alfabeto.
+- $Σ^*$ è esso stesso un linguaggio, il linguaggio formato da tutte le stringhe su Σ;
+- essendo ∅ sottoinsieme di qualsiasi altro insieme, ∅ $⊆ Σ^*$ dunque ∅ è un linguaggio su qualsiasi alfabeto;
+- essendo ε la stringa nulla su qualsiasi alfabeto Σ, $\{ ε \} ⊆ Σ^*$ dunque { ε } è un linguaggio su qualsiasi alfabeto.
 
 Siano Σ un alfabeto e $L_1$, $L_2$ ⊆ $Σ^*$ linguaggi, la <mark style="background: #FFB86CA6;">concatenazione</mark> di $L_1$ e $L_2$, denotata con L1 · L2, è l’insieme:
 $$L_1 \cdot L_2 :=\left\{ {x \cdot y \;|\; x ∈ L_1, y∈L_2} \right\}.$$
 
 > La *concatenazione* viene utilizzata per unire due o più pattern di caratteri in un'unica espressione regolare.
 
-Definiamo ora (*Concatenazione iterata*):
+Definiamo ora la <mark style="background: #BBFABBA6;">*Concatenazione iterata*</mark>:
 $$
 \begin{equation*}
 	\left\{\begin{array}{ll}
@@ -74,7 +74,7 @@ $$
 
 Quindi la chiusura di Kleene è un **UCO** (*Upper Closure Operator*) .
 
-> *UCO* è l'acronimo di *"Operatore di chiusura superiore"*, e comprende le tre operazioni fondamentali nell'algbra delle espressioni regolari (idempotenza, monotonia ed estensività). 
+> *UCO* è l'acronimo di *"Operatore di chiusura superiore"*, e comprende le tre operazioni fondamentali nell'algebra delle espressioni regolari (idempotenza, monotonia ed estensività). 
 > Queste operazioni sono considerate UCO in quanto sono sufficienti per definire tutte le espressioni regolari possibili.
 
 [_Torna all'indice_](#espressioni%20regolari)
@@ -101,7 +101,7 @@ $$
 		E_1 \underline{+} E_2 \;|\; E_1 \underline{\cdot} E_2 \;|\; E^*
 $$
 
-Per quanto riguarda la <mark style="background: #FFB8EBA6;">semantica</mark> di un'espressione regolare, usiamo la definizione di *fa match*.
+Per quanto riguarda la <mark style="background: #FFB8EBA6;">semantica</mark> di un'espressione regolare, usiamo la definizione di "*fa match*".
 Dato $\Sigma := \left\{a_1 \ldots a_n \right\}$ un alfabeto e $r$ un'espressione regolare su $\Sigma$, si dice che una stringa $x \in \Sigma^*$ fa match con $r$, scritto $x \lessdot r$, se:
 1. $a \lessdot a$, se $a \in \Sigma$ (un simbolo dell'alfabeto fa match con se stesso)
 2. $\varepsilon \lessdot \underline{\varepsilon}$ (la stringa vuota fa match con il simbolo che la denota)
@@ -110,11 +110,11 @@ Dato $\Sigma := \left\{a_1 \ldots a_n \right\}$ un alfabeto e $r$ un'espressione
 5. $x \lessdot r_1 \underline{\cdot} r_2$, se esistono $y,z \in \Sigma^*$ tali che $x=y \cdot z ,\; y \lessdot r_1,\, z \lessdot r_2$
 6. $x \lessdot r^*$, se $x \lessdot \varepsilon$ oppure esistono $y,z \in \Sigma^*$ tali che $x=y \cdot z ,\; y \lessdot r,\, z \lessdot r^*$
 
-Deto $\Sigma$ un alfabeto e $r$ una espressione regolare su di esso, definiamo il <mark style="background: #FFB86CA6;">linguaggio denotato da una espressione regolare</mark> $r$ come
+Dato $\Sigma$ un alfabeto e $r$ una espressione regolare su di esso, definiamo il <mark style="background: #FFB86CA6;">linguaggio denotato da una espressione regolare</mark> $r$ come
 $$
 	L(r) = [\![ r ]\!] := \left\{ {x \in \Sigma^* \;|\; x \lessdot r} \right\}  
 $$
-quindi un <mark style="background: #ABF7F7A6;">linguaggio <i>L</i> è regolare</mark> se esiste almeno una espressione regolare $r$ che lo denota, ovvero $$L = L(r)$$
+quindi un <mark style="background: #ABF7F7A6;">linguaggio <i>L</i> è regolare</mark> se esiste almeno una espressione regolare $r$ che lo denota, ovvero $$L = L(r).$$
 [_Torna all'indice_](#espressioni%20regolari)
 
 ---
@@ -133,7 +133,5 @@ Sia $M$ un DFA. Allora esiste una espressione regolare $r$ tale che $L(M) = L(r)
 [[dim_th_4-6.pdf|Dimostrazione teorema 4.6]]
 
 ![[nfa-dfa-re.svg]]
-
-<mark style="background: #FFF3A3A6;">TODO: da finire e sistemare</mark>
 
 [_Torna all'indice_](#espressioni%20regolari)
