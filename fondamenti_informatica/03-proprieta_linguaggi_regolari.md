@@ -35,7 +35,7 @@ Esempio:
 I linguaggi regolari sono chiusi rispetto alle operazioni di unione, concatenazione e chiusura di Kleene.
 
 I linguaggi regolari sono chiusi rispetto alla operazione di complementazione. 
-Ovvero, se $L ⊆ Σ^*$ è regolare, anche $\overline{\rm L} = Σ^* \ L$ è regolare.
+Ovvero, se $L ⊆ Σ^*$ è regolare, anche $\overline{\rm L} = Σ^* \;\text{\\}\; L$ è regolare.
 
 I linguaggi regolari sono chiusi rispetto all’intersezione.
 
