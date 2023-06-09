@@ -2,36 +2,34 @@
 ```toc
 ```
 --- 
-<mark style="background: #FFF3A3A6;">TODO: da sistemare espressioni in latex ε-step e ε-closure</mark>
 
 ## Alfabeti e linguaggi
 Alcune definizioni.
--   _Simbolo_: entità primitiva astratta che non è formalmente definita
--   _Stringa_ (o _parola_): una sequenza finita di simboli giustapposti (uno dietro l’altro)    
--   _Lunghezza_ di una stringa $w$: si denota con $|w|$ ed è il numero di _occorrenze_ di simboli che compongono una stringa. La stringa vuota, costituita da zero simboli, si denota con $\epsilon$ e $|\epsilon| = 0$.
+-   <mark style="background: #FFB86CA6;">_Simbolo_</mark>: entità primitiva astratta che non è formalmente definita
+-   <mark style="background: #FFB86CA6;">_Stringa_</mark> (o _parola_): una sequenza finita di simboli giustapposti (uno dietro l’altro)    
+-   <mark style="background: #FFB86CA6;">_Lunghezza_</mark> di una stringa $w$: si denota con $|w|$ ed è il numero di _occorrenze_ di simboli che compongono una stringa. La stringa vuota, costituita da zero simboli, si denota con $\epsilon$ e $|\epsilon| = 0$.
 
 ![prefix](prefix.jpg)
 
 La _concatenazione_ di due stringhe $v, w$ è la stringa $vw$ che si ottiene facendo seguire alla prima la seconda; è un’operazione associativa.
 
-Un **alfabeto** $\mathbf{\Sigma}$ è un insieme finito di simboli. 
-Un _linguaggio formale_ è un insieme di stringhe costruite a partire dai simboli di un alfabeto $\Sigma$. 
-$\mathbf{\Sigma^*}$ indica l’insieme di tutte le stringhe generabili a partire da un fissato alfabeto $\Sigma$ (l’asterisco si chiama _stella di Kleene_).
+Un <mark style="background: #FFB86CA6;">alfabeto</mark> $\Sigma$ è un insieme finito di simboli. 
+Un <mark style="background: #FFB86CA6;">linguaggio formale</mark> è un insieme di stringhe costruite a partire dai simboli di un alfabeto $\Sigma$. 
+$\Sigma^*$ indica l’insieme di tutte le stringhe generabili a partire da un fissato alfabeto $\Sigma$ (l’asterisco si chiama _stella di Kleene_).
 
 [_Torna all'indice_](#automi%20a%20stati%20finiti)
 
 ---
 
 ## Automi
-Un **automa a stati finiti** è un modello matematico di un sistema avente *input*,
-ed eventualmente *output*, a valori discreti. Il sistema può essere in uno stato tra un
-insieme finito di stati possibili. L’essere in uno stato gli permette di tener traccia
-della storia precedente.
+Un **automa a stati finiti** è un modello matematico di un sistema avente *input*, ed eventualmente *output*, a valori discreti. Il sistema può essere in uno stato tra un insieme finito di stati possibili. L’essere in uno stato gli permette di tener traccia della storia precedente.
 
 Il comportamento dell’automa si definisce in maniera univoca mediante una tabella, detta **matrice di transizione**, come ad esempio:
+
 ![[matrice_transizione.jpeg]]
 
 Con la rappresentazione tramite grafo:
+
 ![[automa01.jpeg | 350]]
 
 [_Torna all'indice_](#automi%20a%20stati%20finiti)
@@ -83,7 +81,7 @@ Se, alla fine dell'elaborazione dell'input, l'automa si trova in uno stato di ac
 ### NFA - Automi non deterministici
 Un **automa a stati finiti non deterministici** (NFA) presenta la stessa struttura vista per i DFA, eccetto per la *funzione di transizione*:
 $$ 
-	\delta : Q \times \Sigma \longrightarrow \mathcal{P}{(Q)}
+	\delta : Q \times \Sigma \longrightarrow \wp{(Q)}
 $$
 Infatti, ora il codominio di $\delta$ è *l'insieme delle parti di Q*; pertanto essa calcola, a partire da una coppia (*stato*, *simbolo*), un insieme di stati risultante. Si noti che ora è possibile $\delta({q,\,a}) = \varnothing$ per qualche $q \in Q$ ed $a \in \Sigma$ (in questo caso la computazione si arresta).
 
@@ -126,7 +124,7 @@ Esiste un procedimento per convertire un NFA in un DFA equivalente, chiamato <ma
 ### ε-NFA: Automi con ε-transizioni
 Un $\text{NFA}$ con $\varepsilon$-transizioni è un automa analogo agli NFA ma da cui differisce per la *funzione di transizione* $\delta$ così definita:
 $$
-	\delta : Q \times \left({ \Sigma \cup \{\varepsilon\} }\right) \longrightarrow \mathcal{P}(Q)
+	\delta : Q \times \left({ \Sigma \cup \{\varepsilon\} }\right) \longrightarrow \wp(Q)
 $$
 ovvero ammette come input non solo simboli ma anche la stringa vuota, associata al "simbolo speciale" $\varepsilon$.
 Questa definizione permette all'automa di passare ad un altro stato anche senza "leggere" caratteri di input.
@@ -171,7 +169,7 @@ Gli epsilon-step e l'epsilon-closure sono due concetti fondamentali nell'ambito 
 
 L'<mark style="background: #FFB86CA6;">ε-step</mark> è un'operazione che permette di spostarsi da uno stato all'altro senza consumare alcun simbolo di input. In pratica, se un automa a stati finiti ha una transizione che utilizza il simbolo epsilon (ε), allora esso può effettuare uno spostamento senza che sia necessario leggere alcun simbolo di input.
 > Definizione formale: 
-> Sia M un ε-NFA definito dalla quintupla $⟨Q, Σ, δ, q0, F ⟩$ e sia $S ∈ ℘(Q)$. L’operatore ε-step: $℘(Q) → ℘(Q)$ è definito come: $$\varepsilon\text{-step}(S) = {q ∈ Q\; | \;∃p ∈ S\; . \; q ∈ δ(p,\,\varepsilon)}.$$
+> Sia M un ε-NFA definito dalla quintupla $⟨Q, Σ, δ, q0, F ⟩$ e sia $S ∈ ℘(Q)$. L’operatore ε-step: $℘(Q) → ℘(Q)$ è definito come: $$\varepsilon\text{-step}(S) = \{q ∈ Q\; | \;∃p ∈ S\; . \; q ∈ δ(p,\,\varepsilon)\}.$$
 
 Un esempio:
 ![[epsilon-NFA_esempio.png]]
@@ -214,7 +212,7 @@ Il resto della computazione è analogo a quello degli automi a stati finiti non 
 Poichè un DFA si può vedere come un NFA in cui $\delta({q,\,a})$ restituisce sempre insiemi costruiti da un solo stato, si ha che <mark style="background: #FFB86CA6;">ogni linguaggio regolare è un linguaggio accettato da un qualunque NFA.</mark>
 
 Dimostriamo che i linguaggi accettati dai DFA e dagli NFA coincidono:
-- DFA $\mathbb\Rightarrow$ NFA
+- NFA $\mathbb\Rightarrow$ DFA
 	Questo lato dell'implicazione è banale; infatti un DFA si può vedere come un NFA in cui per ogni simbolo $a \in \Sigma$ si ha $\delta({q,\,a}) = \{a\}$
 	ovvero la funzione di transizione per NFA restituisce sempre insiemi singoletti.
 
@@ -237,7 +235,7 @@ Un NFA è più comodo di un DFA: permette di eseguire più ipotesi.
 
 ## Equivalenza tra ε-NFA e NFA
 Ogni NFA è, per definizione, un caso particolare di un $\varepsilon$-NFA.
-Sia $M = \langle Q,\,\Sigma,\,\delta,\,q_0,\,F \rangle$ un $\varepsilon$-NFA. Allora esiste un NFA $M'$ tale che $L(M) = L(M')$.
+Sia $M = \langle\, Q,\,\Sigma,\,\delta,\,q_0,\,F \;\rangle$ un $\varepsilon$-NFA. Allora esiste un NFA $M'$ tale che $L(M) = L(M')$.
 
 ### Eliminazione delle ε-transizioni
 Per semplificare l'automa a stati finiti, si può eliminare le ε-transizioni attraverso una procedura di eliminazione delle ε-transizioni, che consiste in tre passi:
